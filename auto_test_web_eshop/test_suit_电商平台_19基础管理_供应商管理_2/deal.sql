@@ -1,0 +1,1 @@
+delete from db_eshop.t_merchant_type where t_merchant_type.name like '%美味佳肴';

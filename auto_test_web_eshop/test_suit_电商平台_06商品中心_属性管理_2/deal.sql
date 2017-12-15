@@ -1,0 +1,1 @@
+delete from db_productcenter.t_property where t_property.property_name like '属性%' or t_property.property_name like '编辑%'

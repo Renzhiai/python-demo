@@ -1,0 +1,1 @@
+delete from db_eshop.t_merchant where t_merchant.name='测试_供应商名字';

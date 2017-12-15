@@ -1,0 +1,1 @@
+delete from db_productcenter.t_spu where t_spu.spu_name like '%草莓'

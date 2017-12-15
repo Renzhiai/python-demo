@@ -1,0 +1,1 @@
+delete from db_eshop.t_coupons_theme where t_coupons_theme.coupons_theme='中秋我们一起去购物吧';
