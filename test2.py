@@ -5,4 +5,4 @@ def add_and_multiply(x,y):
     return (addtion,multiple)
 
 def multiply(x,y):
-    return x*y
+    return 0
