@@ -2,7 +2,13 @@
 import subprocess
 import time
 
-def get_uid_and_packages():
+#获取一个设备里面的所有包和流量（如果wifi和数据流量都为0，则不展示）
+
+def get_uids_and_packages():
+    '''
+    获取所有的uids和packages
+    :return:
+    '''
     uids=[]
     uid=''
     packages=[]
@@ -40,8 +46,8 @@ def remove_duplicate_uid():
     去掉重复的uid，获得整个设备的uid，package
     :return:
     '''
-    uids=get_uid_and_packages()[0]
-    packages=get_uid_and_packages()[1]
+    uids=get_uids_and_packages()[0]
+    packages=get_uids_and_packages()[1]
     uid_and_packages=[]
     for i in range(len(packages)):
         #单个uid和package

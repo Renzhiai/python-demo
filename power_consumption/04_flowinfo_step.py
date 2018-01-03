@@ -2,6 +2,8 @@
 import subprocess
 import time
 
+#根据某个步骤获取指定app的该动作消耗的流量
+
 def get_uid(package):
     '''
     获取uid
@@ -63,9 +65,7 @@ def get_flow(package='com.oecommunity.oeshop'):
 
 if __name__=='__main__':
     flow_old=get_flow()
-    '''
-    要执行的步骤
+    # 要执行的步骤
     time.sleep(5)
-    '''
     flow_new=get_flow()
     print(flow_new-flow_old)
