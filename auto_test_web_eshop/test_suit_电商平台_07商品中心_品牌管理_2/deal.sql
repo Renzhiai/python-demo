@@ -1,1 +1,0 @@
-delete from db_productcenter.t_brand where t_brand.brand_name like '品牌%' or t_brand.brand_name like '编辑%'

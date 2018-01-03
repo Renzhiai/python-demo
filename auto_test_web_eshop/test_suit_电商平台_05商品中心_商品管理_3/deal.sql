@@ -1,1 +1,0 @@
-delete from db_productcenter.t_product where t_product.product_name like '%保时捷';
