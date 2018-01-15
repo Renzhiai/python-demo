@@ -3,6 +3,10 @@ import subprocess
 import time
 
 #获取一个设备里面的所有包和流量（如果wifi和数据流量都为0，则不展示）
+'''
+adb shell dumpsys package packages | findstr /c:"userId" /c:"Package ["
+adb shell cat /proc/net/xt_qtaguid/stats | find "userId"
+'''
 
 def get_uids_and_packages():
     '''

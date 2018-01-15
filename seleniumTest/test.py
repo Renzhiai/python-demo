@@ -22,9 +22,9 @@ url1='http://www.0easy.work'
 url2='http://www.baidu.com'
 url3='http://www.youdao.com/'
 browser.get(url3)
-browser.implicitly_wait(3)
+# browser.implicitly_wait(3)
 
-browser.find_element_by_id('translateContent').send_keys('测试')
+# browser.find_element_by_id('translateContent').send_keys('测试')
 # find_element_by_id()
 # find_element_by_name()
 # find_element_by_class_name()

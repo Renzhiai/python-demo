@@ -1,7 +1,0 @@
--- 删除自动化测试的测试门禁
-DELETE FROM db_unitpropertybase.`t_upb_doorcontrol` WHERE unit_id = 5555 AND door_name LIKE 'TEST%';
--- 删除自动化测试的测试楼层
-DELETE FROM db_unitpropertybase.`t_lift_floor` WHERE unit_id = 971093 AND building_code =0108;
--- 删除自动化测试的测试电梯
-DELETE FROM db_unitpropertybase.`t_lift_info` WHERE unit_id = 5555 AND building_code =0101 AND lift_name LIKE 'lift_autotest%';
-DELETE FROM `db_unitpropertybase`.`t_door_engineer` WHERE NAME LIKE 'autotest%';

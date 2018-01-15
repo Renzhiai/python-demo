@@ -3,6 +3,10 @@ import subprocess
 import time
 
 #根据某个步骤获取指定app的该动作消耗的流量
+'''
+adb shell dumpsys package com.oecommunity.oeshop | find "userId"
+adb shell cat /proc/net/xt_qtaguid/stats | find "userId"
+'''
 
 def get_uid(package):
     '''

@@ -3,6 +3,9 @@ import subprocess
 import time
 
 #每隔一段时间获取指定app的meninfo
+'''
+adb shell dumpsys meminfo | find "com.oecommunity.oeshop"
+'''
 
 #设置结果保存路径
 csv_path='d:/autoTest/meminfo.csv'

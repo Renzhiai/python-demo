@@ -4,14 +4,11 @@ import time
 
 #获取app某个页面的启动时间
 '''
-ThisTime是一连串启动Activity的最后一个Activity的启动耗时。
-TotalTime是新应用启动的耗时，包括新进程的启动和Activity的启动，但不包括前一个应用Activity pause的耗时
-WaitTime是总的耗时，包括前一个应用Activity pause的时间和新应用启动的时间，
-如果关心应用有界面Activity启动耗时，参考ThisTime；
-如果只关心某个应用自身启动耗时，参考TotalTime；我们需要关注的也是这个时间
-如果关心系统启动应用耗时，参考WaitTime；
-
-adb shell am start -W com.oecommunity.oeshop/.component.main.activity.MainActivity
+adb shell dumpsys package com.oecommunity.oeshop | find "userId"
+adb shell dumpsys batterystats --reset
+adb shell dumpsys batterystats >d:/battery.txt
+在文档里面搜索Estimated power use
+根据uid 找到耗费的电量
 '''
 
 #要测试的包
