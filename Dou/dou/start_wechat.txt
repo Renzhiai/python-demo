@@ -1,1 +1,0 @@
-sh /data/local/tmp/Wechat_auto.sh &

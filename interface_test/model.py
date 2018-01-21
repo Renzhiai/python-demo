@@ -4,7 +4,7 @@ import requests
 cookie_28='plf=/; route=6a2329437bbf04787f355e73aee70557; JSESSIONID=E26C2D4E9BA9EC592AFB662ACA289C40; eid01=wKgAyFnxfpl3DG0GAx5jAg=='
 cookie_106='plf=/; JSESSIONID=2977A3F832B7E9761263836CC2886332; eid01=wKgAalnxrrMRwBxQAyhdAg=='
 addr_28='https://01.0easy.com'
-addr_106='https://testone.0easy.com'
+addr_106='https://192.168.0.106'
 
 #添加门禁
 def add_door_28():
