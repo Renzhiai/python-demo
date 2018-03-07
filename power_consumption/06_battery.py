@@ -2,7 +2,7 @@
 import subprocess
 import time
 
-#获取app某个页面的启动时间
+#获取app的耗电量
 '''
 adb shell dumpsys package com.oecommunity.oeshop | find "userId"
 adb shell dumpsys batterystats --reset

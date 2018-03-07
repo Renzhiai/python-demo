@@ -3,7 +3,7 @@ from PIL import Image
 import os
 from urllib.request import urlretrieve
 
-def get_captcha(captcha_url = 'http://one.0easy.com:80/yihao01-park-sso/kaptcha.jpg',image_path = 'c:/test_new.jpg',\
+def get_captcha(captcha_url = 'http://192.168.1.106:80/yihao01-park-sso/kaptcha.jpg',image_path = 'c:/test_new.jpg',\
                 file_path = 'c:/test_captcha.png',text_path = 'c:/test_captcha.txt'):
     urlretrieve(captcha_url,image_path)
     img=Image.open(image_path)

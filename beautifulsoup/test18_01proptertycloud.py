@@ -7,7 +7,7 @@ import requests
 # params = {'username':'','password':''}
 # s = session.post(url_addr,params)
 # print(s.cookies.get_dict())
-url='http://one.0easy.com/yihao01-ecommunity-cloud/manage/propAction!findList.do?pager.offset='
+url=''
 cookie='plf=manage/systemAction!queryAlertMsg.do; JSESSIONID=50AC4644AB6BF20E616B74066C72221B; plf=logout.jsp; eid01=ymhmG1jJHl5kao8xA1IuAg==; UM_distinctid=15d4e3140893e8-05413fcb4-424e002e-1fa400-15d4e31408a6bb'
 pages=[0,10,20,30]
 for page in pages:

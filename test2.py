@@ -1,3 +1,5 @@
 # coding:utf-8
 
-aaaaa
+path='d:/battery.txt'
+x=open(path).readlines()
+print(x)

@@ -1,8 +1,8 @@
 # coding:utf-8
-from uiautomator import Device
+from uiautomator import device as d
 import time
 
-d=Device('127.0.0.1')
-d.click(100,100)
-time.sleep(300)
-
+if d(clickable=True).exists:
+    print(d(clickable=True).count)
+else:
+    print('bbb')

@@ -1,6 +1,6 @@
 # coding:utf-8
-a=0
-if not a>0 and not a<0:
-    print('aaa')
-else:
-    print('bbb')
+nums=[0,0,1,3,12]
+nums=list(set(nums))
+print(nums)
+print(nums.pop(0))
+print(nums)
