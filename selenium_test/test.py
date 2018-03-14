@@ -18,7 +18,7 @@ browser=webdriver.Chrome()
 # 设置浏览器大小
 # browser.set_window_size(480,800)
 
-url1='http://www.0easy.work'
+url1=''
 url2='http://www.baidu.com'
 url3='http://www.youdao.com/'
 browser.get(url3)

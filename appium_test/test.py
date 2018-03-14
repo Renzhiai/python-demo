@@ -8,7 +8,7 @@ desired_caps['platformVersion'] = '6.0.1'
 
 # desired_caps['deviceName'] = 'EQAU49V899999999'   #vivo
 # desired_caps['deviceName'] = '127.0.0.1:62001'    #模拟器
-desired_caps['deviceName'] = '186c3498'     #alcatel
+desired_caps['deviceName'] = '186c3498'     #TCL
 
 # desired_caps['appPackage'] = 'com.android.settings'
 # desired_caps['appActivity'] = '.Settings'
