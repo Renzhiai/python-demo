@@ -61,7 +61,7 @@ def person(name,age,**kw):
 	
 #如果要限制关键字参数的名字，就可以用命名关键字参数
 #如，只接收 city 和 job 作为关键字参数，name，age是位置参数，*是特殊分隔符
-def person(name,age,*,city,job):
+def person(name,age,city,job):
 	print(name,age,city,job)
 	
 #命名关键字参数必须传入参数名
