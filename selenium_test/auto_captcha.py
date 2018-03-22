@@ -1,10 +1,9 @@
 # coding:utf-8
 from selenium import webdriver
-import time
 from PIL import Image
 import os
 
-def get_captcha(driver,captcha_id='kaptchaImage',full_screen_img_path='c:/web.png',
+def get_captcha(url,captcha_id='kaptchaImage',full_screen_img_path='c:/web.png',
                   captcha_img_path='c:/captcha.png',captcha_final_path='c:/captcha_final.png',
                   txt_path='c:/captcha.txt'):
     '''
@@ -18,7 +17,9 @@ def get_captcha(driver,captcha_id='kaptchaImage',full_screen_img_path='c:/web.pn
     :return:验证码 or fail
     '''
 
-    #浏览器界面截图
+    driver = webdriver.Chrome()
+    driver.get(url)
+    # 浏览器界面截图
     driver.save_screenshot(full_screen_img_path)
     #找到验证码图片，得到它的坐标
     element=driver.find_element_by_id(captcha_id)
@@ -33,13 +34,6 @@ def get_captcha(driver,captcha_id='kaptchaImage',full_screen_img_path='c:/web.pn
     img.save(captcha_img_path)
     #打开验证码图片
     img=Image.open(captcha_img_path)
-    #颜色直方图，255种颜色，255为白色
-    his=img.histogram()
-    # values={}
-    # for i in range(256):
-    #     values[i]=his[i]
-    # for j,k in sorted(values.items(),key=lambda x:x[1],reverse = True)[:20]:
-    #     print('颜色：'+str(j),'数量：'+str(k))
     #新建一张图片(大小和原图大小相同，背景颜色为255白色)
     img_new=Image.new('P',img.size,255)
     for x in range(img.size[1]):
