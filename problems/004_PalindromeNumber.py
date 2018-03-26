@@ -1,7 +1,8 @@
 # coding:utf-8
 class Solution(object):
-    def reverse(self,x):
+    def isPalindrome(self, x):
         """
         :type x: int
-        :rtype: int
+        :rtype: bool
         """
+
