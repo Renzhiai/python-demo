@@ -1,16 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
+    <!--viewport 的标签，这个标签可以修改在大部分的移动设备上面的显示，为了确保适当的绘制和触屏缩放。-->
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>零壹接口测试</title>
+    <!--将Bootstrap样式引用到网页中-->
+    <link href="static/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
+    <script src="static/js/jquery-3.2.1.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
 <body>
-<a href="{{url_for('app_add_door_28')}}"><button id="add_door_28">添加门禁_28</button></a><br>
-<a href="{{url_for('app_open_door_voice_28')}}"><button id="open_door_voice_28">打开开门语音_28</button></a><br>
-<a href="{{url_for('app_add_door_engineer_28')}}"><button id="add_door_engineer_28">添加门禁工程师_28</button></a><br>
-<a href="{{url_for('app_add_visible_device_28')}}"><button id="add_visible_device_28">添加可视对讲_28</button></a><br>
-<a href="{{url_for('app_all_28')}}"><button id="all_28">全部</button></a><br>
+    <div class="container">
+        <h1 class="text-center">接口测试</h1>
+    </div>
 
+    <div class="containter">
+        <table class="table border:0px solid transparent">
+        <!--灰色字体-->
+        <caption>Table 基本案例</caption>
+        <thead>
+            <tr class="active">
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>User Name</th>
+            </tr>
+        </thead>
+            <tbody>
+                <tr>
+                  <td>aehyok</td>
+                  <td>leo</td>
+                  <td>@aehyok</td>
+                </tr>
+                <tr>
+                  <td>lynn</td>
+                  <td>thl</td>
+                  <td>@lynn</td>
+                </tr>
+            </tbody>
+        </
+    </div>
+
+
+    <div class="container">
+
+        <a href="{{url_for('app_add_door')}}"><button id="add_door">添加门禁</button></a><br>
+        <a href="{{url_for('app_add_door_engineer')}}"><button id="add_door_engineer">添加门禁工程师</button></a><br>
+        <a href="{{url_for('app_all')}}"><button id="all">全部</button></a><br>
+    </div>
 
 </body>
+
 </html>
