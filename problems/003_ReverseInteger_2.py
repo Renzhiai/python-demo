@@ -4,6 +4,7 @@ import sys
 class Solution(object):
     def reverse(self, x):
         """
+        反转一个int数字，比如123输出321,-123输出-321，不能溢出
         :type x: int
         :rtype: int
         """

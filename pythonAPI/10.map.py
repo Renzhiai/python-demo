@@ -7,7 +7,7 @@ def f(x):
 def func():
 	m=map(f,[1,2,3,4,5,6])
 	for i in m:
-		print(d)
+		print(i)
 	
 #Python 内建的 filter()函数用于过滤序列，和 map()类似， filter()也接收一个函数和一个序列
 #filter()把传入的函数依次作用于每个元素，然后根据返回值是 True 还是 False 决定保留还是丢弃该元素

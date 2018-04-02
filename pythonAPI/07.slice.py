@@ -18,3 +18,6 @@ print(L[::5])
 s="abcdefg"
 print(s[:3])
 print(s[::2])
+
+#反转list
+print(s[::-1])

@@ -1,3 +1,4 @@
+#coding:utf-8
 import time,sys,queue
 from multiprocessing.managers import BaseManager
 

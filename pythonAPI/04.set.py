@@ -11,3 +11,6 @@ set1.remove(4)
 print(set1&set2)
 #set的并集
 print(set1|set2)
+# list去重
+list1 = [2, 4, 3, 4, 5]
+print(list(set(list1)))
