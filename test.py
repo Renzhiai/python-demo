@@ -4,6 +4,7 @@ import time
 from datetime import datetime
 import sys
 from math import sqrt
+from collections import Counter
 
 # while True:
 #     if d(resourceId='com.tcl.eshow:id/iv_qr_code_content').wait.exists():
@@ -26,14 +27,14 @@ from math import sqrt
 # print(cmp(-2, 0))
 
 # print(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-m = 200
-list1 = []
-for i in range(2, m + 1):
-	flag = 1
-	for j in range(2, int(sqrt(m + 1)) + 1):
-		if i % j == 0 and i != j:
-			flag = 0
-			break
-	if flag == 1:
-		list1.append(i)
-print(list1)
+# m = 200
+# list1 = []
+# for i in range(2, m + 1):
+# 	flag = 1
+# 	for j in range(2, int(sqrt(m + 1)) + 1):
+# 		if i % j == 0 and i != j:
+# 			flag = 0
+# 			break
+# 	if flag == 1:
+# 		list1.append(i)
+# print(list1)
