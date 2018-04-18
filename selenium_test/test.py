@@ -13,7 +13,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 # binary = FirefoxBinary(r'C:\Program Files (x86)\Mozilla Firefox\firefox.exe')
 # browser=webdriver.Firefox(firefox_binary=binary)
 
-browser=webdriver.Chrome()
+driver=webdriver.Chrome()
 
 # 设置浏览器大小
 # browser.set_window_size(480,800)
@@ -21,7 +21,8 @@ browser=webdriver.Chrome()
 url1=''
 url2='http://www.baidu.com'
 url3='http://www.youdao.com/'
-browser.get(url3)
+driver.get(url3)
+driver.maximize_window()
 # browser.implicitly_wait(3)
 
 # browser.find_element_by_id('translateContent').send_keys('测试')

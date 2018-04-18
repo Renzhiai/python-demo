@@ -38,3 +38,22 @@ from collections import Counter
 # 	if flag == 1:
 # 		list1.append(i)
 # print(list1)
+
+arr = [2,3,1,5,1,2,1,3]
+# for i in range(len(arr)):
+# 	for j in range(i,len(arr)):
+# 		if arr[i] > arr[j]:
+# 			arr[i],arr[j] = arr[j],arr[i]
+# print(arr)
+
+# result = []
+# for i in list(set(arr)):
+# 	count = 0
+# 	for j in arr:
+# 		if j == i:
+# 			count = count + 1
+# 	result.append((i,count))
+# print(result)
+
+a = 110
+print(100 < a < 150)
