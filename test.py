@@ -39,7 +39,7 @@ from collections import Counter
 # 		list1.append(i)
 # print(list1)
 
-arr = [2,3,1,5,1,2,1,3]
+# arr = [2,3,1,5,1,2,1,3]
 # for i in range(len(arr)):
 # 	for j in range(i,len(arr)):
 # 		if arr[i] > arr[j]:
@@ -55,5 +55,5 @@ arr = [2,3,1,5,1,2,1,3]
 # 	result.append((i,count))
 # print(result)
 
-a = 110
-print(100 < a < 150)
+# a = 110
+# print(100 < a < 150)
