@@ -8,7 +8,7 @@ import requests
 # s = session.post(url_addr,params)
 # print(s.cookies.get_dict())
 url=''
-cookie='plf=manage/systemAction!queryAlertMsg.do; JSESSIONID=50AC4644AB6BF20E616B74066C72221B; plf=logout.jsp; eid01=ymhmG1jJHl5kao8xA1IuAg==; UM_distinctid=15d4e3140893e8-05413fcb4-424e002e-1fa400-15d4e31408a6bb'
+cookie=''
 pages=[0,10,20,30]
 for page in pages:
     #自己先手动登录一遍，拿到cookie，通过cookie去登录网站

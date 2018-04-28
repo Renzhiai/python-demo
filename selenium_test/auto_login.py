@@ -111,5 +111,5 @@ if __name__ == '__main__':
     driver.get(url)
     time.sleep(2)
     usename = 'admin'
-    password = '!@dsgly#$'
+    password = '123456'
     log_in_eshop(driver,usename,password)

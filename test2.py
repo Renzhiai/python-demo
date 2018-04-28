@@ -4,9 +4,9 @@ import time
 
 path = 'c:/captcha.png'
 path2 = 'c:/imgnew/captcha1.png'
-appid = '10127986'
-secret_id = 'AKIDxrX9bvKCE0zXzg6xPirx1ynY9eChkVhk'
-secret_key = '3yqHeruvrAOTJ4qqldRGC1iGf4MalohR'
+appid = ''
+secret_id = ''
+secret_key = ''
 userid= '404261318'
 
 #end_point = TencentYoutuyun.conf.API_TENCENTYUN_END_POINT  // 腾讯云
