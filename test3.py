@@ -14,7 +14,7 @@ for x in range(img.size[1]):
         pix=img.getpixel((y,x))
         # print(pix)
         #自己调色，r=0，g=0，b>0为蓝色
-        if pix[0]<100 and pix[1]<100 and pix[2]>200:
+        if (pix[0] < 100 and pix[1] < 100 and pix[2] > 200) or (pix[0] < 40 and pix[1] < 40 and pix[2] > 100):
             #把遍历的结果放到新图片上，0为透明度，不透明
             img_new.putpixel((y,x),0)
 img_new.save(captcha_final_path,format='png')
