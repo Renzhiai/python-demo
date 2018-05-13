@@ -1,5 +1,6 @@
 # coding:utf-8
 from Tkinter import *
+import ttk
 import ConfigParser
 import subprocess
 
@@ -8,10 +9,31 @@ def getDeivceID():
 	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
 	result = proc.communicate()[0].split('\n')[1].split('\t')[0]
 	print(result)
-	e1.insert(0,result)
+	entDevice.delete(0,END)
+	entDevice.insert(0,result)
 	c['text']=result
-	monkeyCmd='adb shell monkey -p com.oecommunity.oeshop --ignore-crashes --ignore-timeouts --monitor-native-crashes --throttle 500 -s 2000 -v -v -v 80000 >c:/monkey_oshop.txt'
-	
+
+
+def getPkgs():
+	cmd = 'adb shell pm list packages |find "com."'
+	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
+	packages = proc.communicate()[0]
+	print(packages)
+	packages = packages.replace('package:','').split('\n')
+	return packages
+
+def execute():
+	crash = '--ignore-crashes'
+	anr = '--ignore-timeouts'
+	if vCrash.get() == 0:
+		crash = ''
+	if vANR.get() == 0:
+		anr = ''
+	pkg = entPkg.get()
+	cmd='adb shell monkey -p ' +pkg+' '+ crash + ' ' + anr + ' --monitor-native-crashes --throttle 500 -s 2000 -v -v -v 80000 >c:/monkey_oshop.txt'
+	# proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
+
+
 app = Tk()
 
 rowTitle=1
@@ -32,67 +54,72 @@ padyButton = 20
 # 空行
 # label1 = Label(app, text='')
 # label1.grid(row=0)
+app.title('test')
+
 
 # 标题
-label2 = Label(app, text='测试工具', padx=padxLabel, pady=padyLabel, font=('微软雅黑', 20))
-label2.grid(row=rowTitle, column=0, rowspan=1, columnspan=3)
+labTitle = Label(app, text='测试工具', padx=padxLabel, pady=padyLabel, font=('微软雅黑', 20))
+labTitle.grid(row=rowTitle, column=0, rowspan=1, columnspan=3)
 
 # 设备ID
-b2 = Button(app, text='获取设备ID：', command=getDeivceID)
-b2.grid(row=rowDevice, column=0, sticky=E, padx=padxLabel, pady=padyLabel)
+butDevice = Button(app, text='获取设备ID：', command=getDeivceID)
+butDevice.grid(row=rowDevice, column=0, sticky=E, padx=padxLabel, pady=padyLabel)
 
-e1 = Entry(app, textvariable='aaa')
-e1.grid(row=rowDevice, column=1, sticky=E, padx=padxEntry)
+entDevice = Entry(app)
+entDevice.grid(row=rowDevice, column=1, sticky=E, padx=padxEntry)
 
-l2 = Label(app)
-l2.grid(row=rowDevice, column=2, sticky=E, padx=padxLabel)
+labBlank = Label(app)
+labBlank.grid(row=rowDevice, column=2, sticky=E, padx=padxLabel)
 
-# 密码
-l3 = Label(app, text='事件次数：')
-l3.grid(row=rowEvent, column=0, sticky=E, padx=padxLabel, pady=padyLabel)
+# 事件次数
+labEvent = Label(app, text='事件次数：')
+labEvent.grid(row=rowEvent, column=0, sticky=E, padx=padxLabel, pady=padyLabel)
 
-e2 = Entry(app)
-e2.grid(row=rowEvent, column=1, sticky=E, padx=padxEntry)
+entEvent = Entry(app)
+entEvent.grid(row=rowEvent, column=1, sticky=E, padx=padxEntry)
 
-l2 = Label(app)
-l2.grid(row=rowEvent, column=2, sticky=E, padx=padxLabel)
+labBlank = Label(app)
+labBlank.grid(row=rowEvent, column=2, sticky=E, padx=padxLabel)
 
 
 # crash
-l4 = Label(app, text='出现crash是否继续')
-l4.grid(row=rowIsCrash, column=0, sticky=E, padx=padxLabel, pady=padyLabel)
+labCrash = Label(app, text='出现crash是否继续')
+labCrash.grid(row=rowIsCrash, column=0, sticky=E, padx=padxLabel, pady=padyLabel)
 
-b4 = Checkbutton(app)
-b4.grid(row=rowIsCrash, column=1, sticky=W, padx=padxButton)
+vCrash=IntVar()
+butCrash = Checkbutton(app, variable=vCrash)
+butCrash.grid(row=rowIsCrash, column=1, sticky=W, padx=padxButton)
 
-l4 = Label(app)
-l4.grid(row=rowIsCrash, column=2, sticky=E, padx=padxLabel)
+labBlank = Label(app)
+labBlank.grid(row=rowIsCrash, column=2, sticky=E, padx=padxLabel)
 
 # ANR
-l4 = Label(app, text='出现ANR是否继续')
-l4.grid(row=rowIsANR, column=0, sticky=E, padx=padxLabel, pady=padyLabel)
+labANR = Label(app, text='出现ANR是否继续')
+labANR.grid(row=rowIsANR, column=0, sticky=E, padx=padxLabel, pady=padyLabel)
 
-b5 = Checkbutton(app)
-b5.grid(row=rowIsANR, column=1, sticky=W, padx=padxButton)
+vANR=IntVar()
+butANR = Checkbutton(app, variable=vANR)
+butANR.grid(row=rowIsANR, column=1, sticky=W, padx=padxButton)
 
-l4 = Label(app)
-l4.grid(row=rowIsANR, column=2, sticky=E, padx=padxLabel)
+labBlank = Label(app)
+labBlank.grid(row=rowIsANR, column=2, sticky=E, padx=padxLabel)
 
 
 # 包名
-l4 = Label(app, text='请选择程序包')
-l4.grid(row=rowPackage, column=0, sticky=E, padx=padxLabel, pady=padyLabel)
+labPkg = Label(app, text='请输入包名')
+labPkg.grid(row=rowPackage, column=0, sticky=E, padx=padxLabel, pady=padyLabel)
 
-e4 = Entry(app, show='*')
-e4.grid(row=rowPackage, column=1, sticky=E, padx=padxEntry)
+# cBox = ttk.Combobox(app, values=getPackages())
+entPkg = Entry(app)
+entPkg.grid(row=rowPackage, column=1, sticky=E,padx=padxEntry)
 
-l4 = Label(app)
-l4.grid(row=rowPackage, column=2, sticky=E, padx=padxLabel)
+labBlank = Label(app)
+labBlank.grid(row=rowPackage, column=2, sticky=E, padx=padxLabel)
 
 
 # 执行
-b = Button(app, text='执行')
-b.grid(row=rowExcute, column=0, sticky=E)
+butExecute = Button(app, text='执行', command=execute)
+butExecute.grid(row=rowExcute, column=0, sticky=E)
 
 # 提示语
 c = Label(app, text='')
