@@ -2,7 +2,7 @@
 from bs4 import BeautifulSoup
 import requests
 
-# url_addr = 'http://one.0easy.com/'
+# url_addr = ''
 # session = requests.Session()
 # params = {'username':'','password':''}
 # s = session.post(url_addr,params)
