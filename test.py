@@ -6,6 +6,7 @@ import sys
 from math import sqrt
 from collections import Counter
 
+
 # while True:
 #     if d(resourceId='com.tcl.eshow:id/iv_qr_code_content').wait.exists():
 #         print(datetime.now().strftime("%Y-%m-%d %H:%M:%S")+u' 二维码存在')
