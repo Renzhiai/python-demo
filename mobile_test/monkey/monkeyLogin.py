@@ -1,15 +1,14 @@
 # coding:utf-8
-from Tkinter import *
-import ConfigParser
+from tkinter import *
 
 def login():
-	s1 = e1.get()
-	s2 = e2.get()
-	if s1 == '111' and s2 == '222':
+	username = entryUsername.get()
+	password = entryUsername.get()
+	if s1 == 'oeasy' and s2 == 'oeasy':
 		c['text'] = '登录成功'
 	else:
-		e1['text'] = ' '
-		e2['text'] = ' '
+		e1['text'] = ''
+		e2['text'] = ''
 		c['text'] = '账号或者密码错误'
 		c['fg']='red'
 
@@ -22,46 +21,40 @@ rowPassword=3
 rowLogin=4
 rowTip=5
 
-padxLabel = 10
-padyLabel = 10
+padxTitle,padyTitle = 150,20
+padxLabel,padyLabel = 10,10
 padxEntry = 20
-padyEntry = 20
 
-# 空行
-# label1 = Label(app, text='')
-# label1.grid(row=0)
 
 # 标题
-label2 = Label(app, text='测试', padx=padxLabel, pady=padyLabel, font=('微软雅黑', 20))
-label2.grid(row=rowTitle, column=0, rowspan=1, columnspan=3)
+labelTitle = Label(app, text='Monkey测试工具', font=('微软雅黑', 20))
+labelTitle.grid(row=rowTitle, columnspan=2, padx=padxTitle, pady=padyTitle)
 
 # 账号
-l2 = Label(app, text='账号：')
-l2.grid(row=rowUsername, column=0, sticky=E, padx=padxLabel, pady=padyLabel)
+labelUsername = Label(app, text='账号：')
+labelUsername.grid(row=rowUsername, column=0, sticky=E, padx=padxLabel, pady=padyLabel)
 
-e1 = Entry(app)
-e1.grid(row=rowUsername, column=1, sticky=E, padx=padxEntry)
-
-l2 = Label(app)
-l2.grid(row=rowUsername, column=2, sticky=E, padx=padxLabel)
+entryUsername = Entry(app)
+entryUsername.grid(row=rowUsername, column=1, sticky=W, padx=padxEntry)
 
 # 密码
-l3 = Label(app, text='密码：')
-l3.grid(row=rowPassword, column=0, sticky=E, padx=padxLabel, pady=padyLabel)
+labelPassword = Label(app, text='密码：')
+labelPassword.grid(row=rowPassword, column=0, sticky=E, padx=padxLabel, pady=padyLabel)
 
-e2 = Entry(app, show='*')
-e2.grid(row=rowPassword, column=1, sticky=E, padx=padxEntry)
-
-l2 = Label(app)
-l2.grid(row=rowPassword, column=2, sticky=E, padx=padxLabel)
+entryPassword = Entry(app, show='*')
+entryPassword.grid(row=rowPassword, column=1, sticky=W, padx=padxEntry)
 
 # 登录
-b = Button(app, text='登录', command=login)
-b.grid(row=rowLogin, column=0, rowspan=1, columnspan=3, sticky=E)
+btnLogin = Button(app, text='登录', command=login)
+btnLogin.grid(row=rowLogin, column=0, sticky=E, padx=20)
+
+# 退出
+btnQuit = Button(app, text='退出', command=login)
+btnQuit.grid(row=rowLogin, column=1, sticky=W, padx=20)
 
 # 提示语
-c = Label(app, text='')
-c.grid(row=rowTip, column=0, rowspan=1, columnspan=3, sticky=W)
+labelReminder = Label(app, text='')
+labelReminder.grid(row=rowTip, column=0, rowspan=1, columnspan=2, sticky=W+E)
 
 app.mainloop()
 

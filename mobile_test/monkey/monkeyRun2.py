@@ -19,6 +19,7 @@ def getDeivceID():
 	# 填写设备id
 	entryDevice.insert(0, result)
 
+
 def getPkgs():
 	'''
 	获取手机上所有的包
@@ -30,8 +31,11 @@ def getPkgs():
 	packages = packages.replace(b'package:', b'').split(b'\n')
 	return packages
 
+
 def test():
 	btnExecute['state'] = 'disabled'
+	# print(entryEvent.get().isdigit())
+
 
 def execute():
 	#按钮置灰
@@ -50,34 +54,30 @@ def execute():
 	if not seed.isdigit():
 		labelRemind['text'] = '请输入正确的seed'
 		return
-	#是否忽略crash
 	crash = '--ignore-crashes'
+	anr = '--ignore-timeouts'
 	if vCrash.get() == 0:
 		crash = ''
-	#是否忽略ANR
-	anr = '--ignore-timeouts'
 	if vANR.get() == 0:
 		anr = ''
-	#包名不为空
 	pkg = entryPkg.get().strip()
 	if len(pkg) == 0:
 		labelRemind['text'] = '需要填写测试的包名'
 		return
 	lTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 	listInfo.insert(END, lTime + '  Monkey测试开始。。。')
-	#运行monkey语句
 	t1 =threading.Thread(target=run,args=(pkg,crash,anr,seed,event))
 	t1.start()
-	#显示monkey日志
 	t2 = threading.Thread(target=start)
 	t2.start()
+	
+#循环判断标志位
+flagWhile = 1
 
 def run(pkg,crash,anr,seed,event):
 	cmd = 'adb shell monkey -p ' + pkg + ' ' + crash + ' ' + anr + ' --monitor-native-crashes --throttle 1000 -s ' + seed + ' -v -v -v ' + event + ' >c:/monkey.log'
 	os.system(cmd)
-
-#循环判断标志位
-flagWhile = 1
+	
 def start():
 	time.sleep(5)
 	global flagWhile
@@ -85,10 +85,13 @@ def start():
 		readLog()
 		time.sleep(5)
 
+
 def stop():
 	btnExecute['state'] = 'active'
 	global flagWhile
 	flagWhile = -1
+
+
 
 line = 1
 result = []
