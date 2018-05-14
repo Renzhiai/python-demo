@@ -65,7 +65,7 @@ def execute():
 		labelRemind['text'] = '需要填写测试的包名'
 		return
 	
-	t1 =threading.Thread(target=run,)
+	t1 =threading.Thread(target=run,args=(pkg,crash,anr,seed,event))
 	t1.start()
 	t2 = threading.Thread(target=start)
 	t2.start()
@@ -74,7 +74,7 @@ def execute():
 flagWhile = 1
 
 def run(pkg,crash,anr,seed,event):
-	cmd = 'adb shell monkey -p ' + pkg + ' ' + crash + ' ' + anr + ' --monitor-native-crashes --throttle 1000 -s ' + seed + ' -v -v -v ' + event + ' >c:/monkey.txt'
+	cmd = 'adb shell monkey -p ' + pkg + ' ' + crash + ' ' + anr + ' --monitor-native-crashes --throttle 1000 -s ' + seed + ' -v -v -v ' + event + ' >c:/monkey.log'
 	os.system(cmd)
 	
 def start():
