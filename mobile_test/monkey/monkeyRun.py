@@ -6,7 +6,29 @@ import time
 import threading
 import os
 
-def getDeivceID():
+app = Tk()
+
+keywords = ['// CRASH:', 'ANR in ']
+
+rowTitle = 1
+rowDevice = 2
+rowEvent = 3
+rowSeed = 4
+rowIsCrash = 5
+rowIsANR = 6
+rowPackage = 7
+rowRemind = 8
+rowExecute = 9
+rowInfo = 10
+
+padxTitle,padyTitle = 10,20
+padxLabel,padyLabel = 10,10
+padxEntry,padyEntry = 20,20
+padxButton,padyButton = 10,20
+padxListbox,padyListbox = 10,10
+
+
+def getDeivceID(entryDevice):
 	'''
 	获取设备id
 	:return:
@@ -30,13 +52,13 @@ def getPkgs():
 	packages = packages.replace(b'package:', b'').split(b'\n')
 	return packages
 
-def test():
+def test(btnExecute):
 	btnExecute['state'] = 'disabled'
 
-def execute():
+def execute(btnExecute,listInfo,entryDevice,labelRemind,entryEvent,entrySeed,vCrash,vANR,entryPkg):
 	#按钮置灰
 	btnExecute['state'] = 'disabled'
-	# 设备id不为空，用来检测是否能运行adb
+	# 设备id不为空，运行脚本时其实没有限定设备id，此项主要用来检测是否能运行adb
 	if len(entryDevice.get().strip()) == 0:
 		labelRemind['text'] = '请输入设备ID'
 		return
@@ -78,21 +100,20 @@ def run(pkg,crash,anr,seed,event):
 
 #循环判断标志位
 flagWhile = 1
-def start():
-	time.sleep(5)
+def start(listInfo,btnExecute):
 	global flagWhile
 	while flagWhile > 0:
-		readLog()
 		time.sleep(5)
+		readLog(listInfo,btnExecute)
 
-def stop():
+def stop(btnExecute):
 	btnExecute['state'] = 'active'
 	global flagWhile
 	flagWhile = -1
 
 line = 1
 result = []
-def readLog():
+def readLog(listInfo,btnExecute):
 	count = 1
 	global line
 	global result
@@ -103,109 +124,84 @@ def readLog():
 		if count > line and ('// CRASH:' in i or 'ANR in ' in i):
 			lTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 			listInfo.insert(END, lTime + '  ' + i)
-	print(count,line)
 	if line == count:
 		result.append(line)
-		print(len(result))
 		if len(result) == 5:
 			lTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 			listInfo.insert(END,lTime + '  Monkey测试结束！')
-			stop()
+			stop(btnExecute)
 	line = count
 
-
-app = Tk()
-
-keywords = ['// CRASH:', 'ANR in ']
-
-rowTitle = 1
-rowDevice = 2
-rowEvent = 3
-rowSeed = 4
-rowIsCrash = 5
-rowIsANR = 6
-rowPackage = 7
-rowRemind = 8
-rowExecute = 9
-rowInfo = 10
-
-padxTitle,padyTitle = 10,20
-padxLabel,padyLabel = 10,10
-padxEntry,padyEntry = 20,20
-padxButton,padyButton = 10,20
-padxListbox,padyListbox = 10,10
-
-app.title('Oeasy')
-
-# 标题
-labelTitle = Label(app, text='Monkey测试工具', font=('微软雅黑', 20))
-labelTitle.grid(row=rowTitle, columnspan=2, padx=padxTitle, pady=padyTitle)
-
-# 设备ID
-btnDevice = Button(app, text='获取设备ID', command=getDeivceID)
-btnDevice.grid(row=rowDevice, column=0, sticky=E, padx=padxLabel, pady=padyLabel)
-
-entryDevice = Entry(app)
-entryDevice.grid(row=rowDevice, column=1, sticky=W, padx=padxEntry)
-
-# 事件次数
-labelEvent = Label(app, text='事件次数：')
-labelEvent.grid(row=rowEvent, column=0, sticky=E, padx=padxLabel, pady=padyLabel)
-
-entryEvent = Entry(app)
-entryEvent.grid(row=rowEvent, column=1, sticky=W, padx=padxEntry)
-
-# seed值
-labelSeed = Label(app, text='seed值：')
-labelSeed.grid(row=rowSeed, column=0, sticky=E, padx=padxLabel, pady=padyLabel)
-
-entrySeed = Entry(app)
-entrySeed.grid(row=rowSeed, column=1, sticky=W, padx=padxEntry)
-
-# crash
-labelCrash = Label(app, text='出现crash是否继续：')
-labelCrash.grid(row=rowIsCrash, column=0, sticky=E, padx=padxLabel, pady=padyLabel)
-
-vCrash = IntVar()
-btnCrash = Checkbutton(app, variable=vCrash)
-btnCrash.select()  # 默认勾选
-btnCrash.grid(row=rowIsCrash, column=1, sticky=W, padx=padxButton)
-
-# ANR
-labelANR = Label(app, text='出现ANR是否继续：')
-labelANR.grid(row=rowIsANR, column=0, sticky=E, padx=padxLabel, pady=padyLabel)
-
-vANR = IntVar()
-btnANR = Checkbutton(app, variable=vANR)
-btnANR.select()  # 默认勾选
-btnANR.grid(row=rowIsANR, column=1, sticky=W, padx=padxButton)
-
-# 包名
-labelPkg = Label(app, text='请输入包名：')
-labelPkg.grid(row=rowPackage, column=0, sticky=E, padx=padxLabel, pady=padyLabel)
-
-entryPkg = Entry(app)
-entryPkg.grid(row=rowPackage, column=1, sticky=W, padx=padxEntry)
-entryPkg.insert(0,'com.android.settings')
-
-# 提示信息
-labelRemind = Label(app, fg='red', font=('微软雅黑'))
-labelRemind.grid(row=rowRemind, column=0, rowspan=1, columnspan=2, sticky=E + W, padx=padxLabel, pady=padyLabel)
-
-# 执行
-btnExecute = Button(app, text='  执行  ', command=execute)
-btnExecute.grid(row=rowExecute, column=0, sticky=E, padx=padxButton)
-
-# 停止
-btnStop = Button(app, text='  停止  ', command=stop)
-btnStop.grid(row=rowExecute, column=1, sticky=W, padx=padxButton)
-
-# 调试
-# btnTest = Button(app, text='  调试  ', command=test)
-# btnTest.grid(row=rowExecute, column=2, sticky=E)
-
-# 展示信息
-listInfo = Listbox(app, width=70, height=10)
-listInfo.grid(row=rowInfo, column=0, rowspan=1, columnspan=2, padx=padxListbox, pady=padyListbox)
-
-app.mainloop()
+def makeWidgetInRun(app):
+	# 标题
+	labelTitle = Label(app, text='Monkey测试工具', font=('微软雅黑', 20))
+	labelTitle.grid(row=rowTitle, columnspan=2, padx=padxTitle, pady=padyTitle)
+	
+	# 设备ID
+	btnDevice = Button(app, text='获取设备ID', command=getDeivceID)
+	btnDevice.grid(row=rowDevice, column=0, sticky=E, padx=padxLabel, pady=padyLabel)
+	
+	entryDevice = Entry(app)
+	entryDevice.grid(row=rowDevice, column=1, sticky=W, padx=padxEntry)
+	
+	# 事件次数
+	labelEvent = Label(app, text='事件次数：')
+	labelEvent.grid(row=rowEvent, column=0, sticky=E, padx=padxLabel, pady=padyLabel)
+	
+	entryEvent = Entry(app)
+	entryEvent.grid(row=rowEvent, column=1, sticky=W, padx=padxEntry)
+	
+	# seed值
+	labelSeed = Label(app, text='seed值：')
+	labelSeed.grid(row=rowSeed, column=0, sticky=E, padx=padxLabel, pady=padyLabel)
+	
+	entrySeed = Entry(app)
+	entrySeed.grid(row=rowSeed, column=1, sticky=W, padx=padxEntry)
+	
+	# crash
+	labelCrash = Label(app, text='出现crash是否继续：')
+	labelCrash.grid(row=rowIsCrash, column=0, sticky=E, padx=padxLabel, pady=padyLabel)
+	
+	vCrash = IntVar()
+	btnCrash = Checkbutton(app, variable=vCrash)
+	btnCrash.select()  # 默认勾选
+	btnCrash.grid(row=rowIsCrash, column=1, sticky=W, padx=padxButton)
+	
+	# ANR
+	labelANR = Label(app, text='出现ANR是否继续：')
+	labelANR.grid(row=rowIsANR, column=0, sticky=E, padx=padxLabel, pady=padyLabel)
+	
+	vANR = IntVar()
+	btnANR = Checkbutton(app, variable=vANR)
+	btnANR.select()  # 默认勾选
+	btnANR.grid(row=rowIsANR, column=1, sticky=W, padx=padxButton)
+	
+	# 包名
+	labelPkg = Label(app, text='请输入包名：')
+	labelPkg.grid(row=rowPackage, column=0, sticky=E, padx=padxLabel, pady=padyLabel)
+	
+	entryPkg = Entry(app)
+	entryPkg.grid(row=rowPackage, column=1, sticky=W, padx=padxEntry)
+	entryPkg.insert(0,'com.android.settings')
+	
+	# 提示信息
+	labelRemind = Label(app, fg='red', font=('微软雅黑'))
+	labelRemind.grid(row=rowRemind, column=0, rowspan=1, columnspan=2, sticky=E + W, padx=padxLabel, pady=padyLabel)
+	
+	# 执行
+	btnExecute = Button(app, text='  执行  ', command=execute)
+	btnExecute.grid(row=rowExecute, column=0, sticky=E, padx=padxButton)
+	
+	# 停止
+	btnStop = Button(app, text='  停止  ', command=stop)
+	btnStop.grid(row=rowExecute, column=1, sticky=W, padx=padxButton)
+	
+	# 调试
+	# btnTest = Button(app, text='  调试  ', command=test)
+	# btnTest.grid(row=rowExecute, column=2, sticky=E)
+	
+	# 展示信息
+	listInfo = Listbox(app, width=70, height=10)
+	listInfo.grid(row=rowInfo, column=0, rowspan=1, columnspan=2, padx=padxListbox, pady=padyListbox)
+	
+	app.mainloop()
