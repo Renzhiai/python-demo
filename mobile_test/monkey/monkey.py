@@ -51,10 +51,10 @@ class MonkeyTest:
 		password = self.entryPassword.get().strip()
 		if username == 'oeasy' and password == '123456':
 			self.labelReminder['text'] = '登录成功'
-			self.frameLogin.destroy()
-			self.createRun()
+			self.frameLogin.destroy()   # 销毁登录页面
+			self.createRun()    # 创建monkey运行界面
 		else:
-			self.entryPassword.delete(0, END)
+			self.entryPassword.delete(0, END)   # 清空密码框
 			self.labelReminder['text'] = '账号或者密码错误'
 			self.labelReminder['fg'] = 'red'
 	
@@ -109,10 +109,10 @@ class MonkeyTest:
 		labelPkg.grid(row=rowPackage, column=0, sticky=E, padx=padxLabel, pady=padyLabel)
 		self.entryPkg = Entry(self.frame)
 		self.entryPkg.grid(row=rowPackage, column=1, sticky=W, padx=padxEntry)
-		self.entryPkg.insert(0, 'com.android.settings')
+		self.entryPkg.insert(0, 'com.android.settings') # 默认settings包
 		# 提示信息
 		self.labelRemind = Label(self.frame, fg='red', font=('微软雅黑'))
-		self.labelRemind.grid(row=rowRemind, column=0, rowspan=1, columnspan=2, sticky=E + W, padx=padxLabel, pady=padyLabel)
+		self.labelRemind.grid(row=rowRemind, column=0, columnspan=2, sticky=E + W, padx=padxLabel, pady=padyLabel)
 		# 执行
 		self.btnExecute = Button(self.frame, text='  执行  ', command=self.execute)
 		self.btnExecute.grid(row=rowExecute, column=0, sticky=E, padx=padxButton)
@@ -121,7 +121,7 @@ class MonkeyTest:
 		btnStop.grid(row=rowExecute, column=1, sticky=W, padx=padxButton)
 		# 展示信息
 		self.listInfo = Listbox(self.frame, width=70, height=10)
-		self.listInfo.grid(row=rowInfo, column=0, rowspan=1, columnspan=2, padx=padxListbox, pady=padyListbox)
+		self.listInfo.grid(row=rowInfo, column=0, columnspan=2, padx=padxListbox, pady=padyListbox)
 		self.root.mainloop()
 	
 	def getDeivceID(self):
@@ -132,10 +132,8 @@ class MonkeyTest:
 		cmd = 'adb devices'
 		proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
 		result = proc.communicate()[0].split(b'\n')[1].split(b'\t')[0]
-		# 清空设备id编辑框
-		self.entryDevice.delete(0, END)
-		# 填写设备id
-		self.entryDevice.insert(0, result)
+		self.entryDevice.delete(0, END) # 清空设备id编辑框
+		self.entryDevice.insert(0, result)  # 填写设备id
 	
 	def getPkgs(self):
 		'''
@@ -153,23 +151,30 @@ class MonkeyTest:
 		os.system(cmd)
 	
 	def start(self):
-		while self.flagWhile > 0:
+		'''
+		5秒读一次monkey的log，
+		第一次等5秒是让adb命令先运行，防止先读log而又没有monkey.log文件，导致异常
+		:return:
+		'''
+		while self.flagWhile > 0:   # 标志位初始值大于0，进入循环
 			time.sleep(5)
 			self.readLog()
 	
 	def stop(self):
-		self.btnExecute['state'] = 'active'
-		self.flagWhile = -1
+		self.btnExecute['state'] = 'active' # 激活执行按钮
+		self.flagWhile = -1 # 标志位小于0，跳出循环
 	
 	def readLog(self):
 		count = 1
 		f = open('c:/monkey.log', 'r', encoding='utf8')
 		for i in f.readlines():
-			count = count + 1
+			count = count + 1   # 记录每次读取log的行数，每读一行，计数+1
+			# count > line 防止重复insret
 			if count > self.line and ('// CRASH:' in i or 'ANR in ' in i):
 				lTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 				self.listInfo.insert(END, lTime + '  ' + i)
-		# print(self.line, count)
+		print(self.line, count)
+		# 连续5次读取的行数都相等，判定monkey停止
 		if self.line == count:
 			self.result.append(self.line)
 			if len(self.result) == 5:

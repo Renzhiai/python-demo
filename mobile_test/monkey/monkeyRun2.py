@@ -14,10 +14,12 @@ class MonkeyTest:
 		self.line = 1       # 用于统计monkey日志的行数
 		self.result = []    # 根据日志的行数变化来判定monkey是否停止
 		self.flagWhile = 1  # 循环判断标志位
-	
-	
-	
+
 	def createRun(self):
+		'''
+
+		:return:
+		'''
 		self.frame = Frame()
 		self.frame.pack()
 		rowTitle, rowDevice, rowEvent, rowSeed, rowIsCrash = 1, 2, 3, 4, 5
@@ -65,10 +67,10 @@ class MonkeyTest:
 		labelPkg.grid(row=rowPackage, column=0, sticky=E, padx=padxLabel, pady=padyLabel)
 		self.entryPkg = Entry(self.frame)
 		self.entryPkg.grid(row=rowPackage, column=1, sticky=W, padx=padxEntry)
-		self.entryPkg.insert(0, 'com.android.settings')
+		self.entryPkg.insert(0, 'com.android.settings') # 默认settings包
 		# 提示信息
 		self.labelRemind = Label(self.frame, fg='red', font=('微软雅黑'))
-		self.labelRemind.grid(row=rowRemind, column=0, rowspan=1, columnspan=2, sticky=E + W, padx=padxLabel, pady=padyLabel)
+		self.labelRemind.grid(row=rowRemind, column=0, columnspan=2, sticky=E + W, padx=padxLabel, pady=padyLabel)
 		# 执行
 		self.btnExecute = Button(self.frame, text='  执行  ', command=self.execute)
 		self.btnExecute.grid(row=rowExecute, column=0, sticky=E, padx=padxButton)
@@ -77,7 +79,7 @@ class MonkeyTest:
 		btnStop.grid(row=rowExecute, column=1, sticky=W, padx=padxButton)
 		# 展示信息
 		self.listInfo = Listbox(self.frame, width=70, height=10)
-		self.listInfo.grid(row=rowInfo, column=0, rowspan=1, columnspan=2, padx=padxListbox, pady=padyListbox)
+		self.listInfo.grid(row=rowInfo, column=0, columnspan=2, padx=padxListbox, pady=padyListbox)
 		self.root.mainloop()
 	
 	def getDeivceID(self):
@@ -93,39 +95,35 @@ class MonkeyTest:
 		# 填写设备id
 		self.entryDevice.insert(0, result)
 	
-	def getPkgs(self):
-		'''
-		获取手机上所有的包
-		:return:
-		'''
-		cmd = 'adb shell pm list packages |find "com."'
-		proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
-		packages = proc.communicate()[0]
-		packages = packages.replace(b'package:', b'').split(b'\n')
-		return packages
-	
 	def run(self):
 		cmd = 'adb shell monkey -p ' + self.pkg + ' ' + self.crash + ' ' + self.anr + ' --monitor-native-crashes --throttle 1000 -s ' + self.seed + ' -v -v -v ' + self.event + ' >c:/monkey.log'
 		os.system(cmd)
 	
 	def start(self):
-		while self.flagWhile > 0:
+		'''
+		5秒读一次monkey的log，
+		第一次等5秒是让adb命令先运行，防止先读log而又没有monkey.log文件，导致异常
+		:return:
+		'''
+		while self.flagWhile > 0:   # 标志位初始值大于0，进入循环
 			time.sleep(5)
 			self.readLog()
 	
 	def stop(self):
-		self.btnExecute['state'] = 'active'
-		self.flagWhile = -1
+		self.btnExecute['state'] = 'active' # 激活执行按钮
+		self.flagWhile = -1 # 标志位小于0，跳出循环
 	
 	def readLog(self):
 		count = 1
 		f = open('c:/monkey.log', 'r', encoding='utf8')
 		for i in f.readlines():
-			count = count + 1
+			count = count + 1   # 记录每次读取log的行数，每读一行，计数+1
+			# count > line 防止重复insret
 			if count > self.line and ('// CRASH:' in i or 'ANR in ' in i):
 				lTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 				self.listInfo.insert(END, lTime + '  ' + i)
 		print(self.line, count)
+		# 连续5次读取的行数都相等，判定monkey停止
 		if self.line == count:
 			self.result.append(self.line)
 			if len(self.result) == 5:
