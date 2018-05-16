@@ -6,22 +6,28 @@ import time
 import threading
 import os
 
+
 class MonkeyTest:
 	def __init__(self):
-		self.root =Tk()
+		self.root = Tk()
 		self.root.title('Oeasy')
-		
+		self.line = 1       # 用于统计monkey日志的行数
+		self.result = []    # 根据日志的行数变化来判定monkey是否停止
+		self.flagWhile = 1  # 循环判断标志位
+	
+	
+	
 	def createRun(self):
 		self.frame = Frame()
 		self.frame.pack()
-		rowTitle,rowDevice,rowEvent,rowSeed,rowIsCrash= 1,2,3,4,5
-		rowIsANR,rowPackage,rowRemind,rowExecute,rowInfo= 6,7,8,9,10
-		padxTitle,padyTitle = 10,20
-		padxLabel,padyLabel = 10,10
-		padxEntry,padyEntry = 20,20
-		padxButton,padyButton = 10,20
-		padxListbox,padyListbox = 10,10
-		keywords = ['// CRASH:', 'ANR in ']
+		rowTitle, rowDevice, rowEvent, rowSeed, rowIsCrash = 1, 2, 3, 4, 5
+		rowIsANR, rowPackage, rowRemind, rowExecute, rowInfo = 6, 7, 8, 9, 10
+		padxTitle, padyTitle = 10, 20
+		padxLabel, padyLabel = 10, 10
+		padxEntry, padyEntry = 20, 20
+		padxButton, padyButton = 10, 20
+		padxListbox, padyListbox = 10, 10
+		# keywords = ['// CRASH:', 'ANR in ']
 		# 标题
 		labelTitle = Label(self.frame, text='Monkey测试工具', font=('微软雅黑', 20))
 		labelTitle.grid(row=rowTitle, columnspan=2, padx=padxTitle, pady=padyTitle)
@@ -59,7 +65,7 @@ class MonkeyTest:
 		labelPkg.grid(row=rowPackage, column=0, sticky=E, padx=padxLabel, pady=padyLabel)
 		self.entryPkg = Entry(self.frame)
 		self.entryPkg.grid(row=rowPackage, column=1, sticky=W, padx=padxEntry)
-		self.entryPkg.insert(0,'com.android.settings')
+		self.entryPkg.insert(0, 'com.android.settings')
 		# 提示信息
 		self.labelRemind = Label(self.frame, fg='red', font=('微软雅黑'))
 		self.labelRemind.grid(row=rowRemind, column=0, rowspan=1, columnspan=2, sticky=E + W, padx=padxLabel, pady=padyLabel)
@@ -67,16 +73,13 @@ class MonkeyTest:
 		self.btnExecute = Button(self.frame, text='  执行  ', command=self.execute)
 		self.btnExecute.grid(row=rowExecute, column=0, sticky=E, padx=padxButton)
 		# 停止
-		btnStop = Button(self.frame, text='  停止  ', command=stop)
+		btnStop = Button(self.frame, text='  停止  ', command=self.stop)
 		btnStop.grid(row=rowExecute, column=1, sticky=W, padx=padxButton)
-		# 调试
-		# btnTest = Button(self.frame, text='  调试  ', command=test)
-		# btnTest.grid(row=rowExecute, column=2, sticky=E)
 		# 展示信息
 		self.listInfo = Listbox(self.frame, width=70, height=10)
 		self.listInfo.grid(row=rowInfo, column=0, rowspan=1, columnspan=2, padx=padxListbox, pady=padyListbox)
 		self.root.mainloop()
-
+	
 	def getDeivceID(self):
 		'''
 		获取设备id
@@ -89,7 +92,7 @@ class MonkeyTest:
 		self.entryDevice.delete(0, END)
 		# 填写设备id
 		self.entryDevice.insert(0, result)
-
+	
 	def getPkgs(self):
 		'''
 		获取手机上所有的包
@@ -100,9 +103,39 @@ class MonkeyTest:
 		packages = proc.communicate()[0]
 		packages = packages.replace(b'package:', b'').split(b'\n')
 		return packages
-
+	
+	def run(self):
+		cmd = 'adb shell monkey -p ' + self.pkg + ' ' + self.crash + ' ' + self.anr + ' --monitor-native-crashes --throttle 1000 -s ' + self.seed + ' -v -v -v ' + self.event + ' >c:/monkey.log'
+		os.system(cmd)
+	
+	def start(self):
+		while self.flagWhile > 0:
+			time.sleep(5)
+			self.readLog()
+	
+	def stop(self):
+		self.btnExecute['state'] = 'active'
+		self.flagWhile = -1
+	
+	def readLog(self):
+		count = 1
+		f = open('c:/monkey.log', 'r', encoding='utf8')
+		for i in f.readlines():
+			count = count + 1
+			if count > self.line and ('// CRASH:' in i or 'ANR in ' in i):
+				lTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+				self.listInfo.insert(END, lTime + '  ' + i)
+		print(self.line, count)
+		if self.line == count:
+			self.result.append(self.line)
+			if len(self.result) == 5:
+				lTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+				self.listInfo.insert(END, lTime + '  Monkey测试结束！')
+				self.stop()
+		self.line = count
+		
 	def execute(self):
-		#按钮置灰
+		# 按钮置灰
 		self.btnExecute['state'] = 'disabled'
 		# 设备id不为空，运行脚本时其实没有限定设备id，此项主要用来检测是否能运行adb
 		if len(self.entryDevice.get().strip()) == 0:
@@ -118,64 +151,27 @@ class MonkeyTest:
 		if not self.seed.isdigit():
 			self.labelRemind['text'] = '请输入正确的seed'
 			return
-		#是否忽略crash
+		# 是否忽略crash
 		self.crash = '--ignore-crashes'
 		if self.vCrash.get() == 0:
 			self.crash = ''
-		#是否忽略ANR
+		# 是否忽略ANR
 		self.anr = '--ignore-timeouts'
 		if self.vANR.get() == 0:
 			self.anr = ''
-		#包名不为空
+		# 包名不为空
 		self.pkg = self.entryPkg.get().strip()
 		if len(self.pkg) == 0:
 			self.labelRemind['text'] = '需要填写测试的包名'
 			return
 		lTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 		self.listInfo.insert(END, lTime + '  Monkey测试开始。。。')
-		#运行monkey语句
-		t1 =threading.Thread(target=self.run,args=(self.pkg,self.crash,self.anr,self.seed,self.event))
+		# 运行monkey语句
+		t1 = threading.Thread(target=self.run)
 		t1.start()
-		#显示monkey日志
-		t2 = threading.Thread(target=start)
+		# 显示monkey日志
+		t2 = threading.Thread(target=self.start)
 		t2.start()
 
-	def run(self):
-		cmd = 'adb shell monkey -p ' + self.pkg + ' ' + self.crash + ' ' + self.anr + ' --monitor-native-crashes --throttle 1000 -s ' + self.seed + ' -v -v -v ' + self.event + ' >c:/monkey.log'
-		os.system(cmd)
-
-	#循环判断标志位
-	flagWhile = 1
-	def start(listInfo,btnExecute):
-		global flagWhile
-		while flagWhile > 0:
-			time.sleep(5)
-			readLog(listInfo,btnExecute)
-
-	def stop(btnExecute):
-		btnExecute['state'] = 'active'
-		global flagWhile
-		flagWhile = -1
-
-	line = 1
-	result = []
-	def readLog(listInfo,btnExecute):
-		count = 1
-		global line
-		global result
-		global flagWhile
-		f = open('c:/monkey.log', 'r', encoding='utf8')
-		for i in f.readlines():
-			count = count + 1
-			if count > line and ('// CRASH:' in i or 'ANR in ' in i):
-				lTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-				listInfo.insert(END, lTime + '  ' + i)
-		if line == count:
-			result.self.frameend(line)
-			if len(result) == 5:
-				lTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-				listInfo.insert(END,lTime + '  Monkey测试结束！')
-				stop(btnExecute)
-		line = count
-
-
+m = MonkeyTest()
+m.createRun()
