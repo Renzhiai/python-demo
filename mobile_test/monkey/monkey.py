@@ -13,6 +13,8 @@ class MonkeyTest:
         self.root.title('Oeasy')
         self.line = 1  # 用于统计monkey日志的行数
         self.flagWhile = 1  # 循环判断标志位
+        self.t1 = threading.Thread(target=self.run)
+        self.t2 = threading.Thread(target=self.start)
         
     def createLogin(self):
         self.frameLogin = Frame()
@@ -166,6 +168,7 @@ class MonkeyTest:
     def stop(self):
         self.btnExecute['state'] = 'active' # 激活执行按钮
         self.flagWhile = -1 # 标志位小于0，跳出循环
+        
     
     def readLog(self):
         count = 1
@@ -214,14 +217,13 @@ class MonkeyTest:
             return
         # 按钮置灰
         self.btnExecute['state'] = 'disabled'
+        self.line = 1
         lTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         self.listInfo.insert(END, lTime + '  Monkey测试开始。。。')
         # 运行monkey语句
-        t1 = threading.Thread(target=self.run)
-        t1.start()
+        self.t1.start()
         # 显示monkey日志
-        t2 = threading.Thread(target=self.start)
-        t2.start()
+        self.t2.start()
 
 m = MonkeyTest()
 m.createLogin()
