@@ -13,8 +13,8 @@ class MonkeyTest:
         self.root.title('Oeasy')
         self.line = 1  # 用于统计monkey日志的行数
         self.flagWhile = 1  # 循环判断标志位
-        self.t1 = threading.Thread(target=self.run)
-        self.t2 = threading.Thread(target=self.start)
+        self.t1 = threading.Thread(target=self.executeCmd)
+        self.t2 = threading.Thread(target=self.startReadLog)
         
     def createLogin(self):
         self.frameLogin = Frame()
@@ -151,11 +151,11 @@ class MonkeyTest:
         packages = packages.replace(b'package:', b'').split(b'\n')
         return packages
     
-    def run(self):
+    def executeCmd(self):
         cmd = 'adb shell monkey -p ' + self.pkg + ' ' + self.crash + ' ' + self.anr + ' --monitor-native-crashes --throttle 1000 -s ' + self.seed + ' -v -v -v ' + self.event + ' >c:/monkey.log'
         os.system(cmd)
     
-    def start(self):
+    def startReadLog(self):
         '''
         5秒读一次monkey的log，
         第一次等5秒是让adb命令先运行，防止先读log而又没有monkey.log文件，导致异常
@@ -168,8 +168,7 @@ class MonkeyTest:
     def stop(self):
         self.btnExecute['state'] = 'active' # 激活执行按钮
         self.flagWhile = -1 # 标志位小于0，跳出循环
-        
-    
+
     def readLog(self):
         count = 1
         f = open('c:/monkey.log', 'r', encoding='utf8')

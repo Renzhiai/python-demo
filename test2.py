@@ -18,4 +18,4 @@ youtu = TencentYoutuyun.YouTu(appid, secret_id, secret_key, userid, end_point)
 
 ret = youtu.generalocr(path2)
 for i in ret['items'][0]['words']:
-	print i['character']
+	print (i['character'])
