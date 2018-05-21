@@ -132,7 +132,7 @@ class MonkeyTest:
         # cmd2 = 'adb devices'
         # proc = subprocess.Popen(cmd2, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
         # result = proc.communicate()[0].split(b'\n')[1].split(b'\t')[0]
-        os.popen(cmd)
+        os.system(cmd)
         with open('c:/devices.log','r') as f:
             result = f.readlines()[1].split('\t')[0]
         self.entryDevice.delete(0, END) # 清空设备id编辑框
