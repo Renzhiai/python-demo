@@ -13,8 +13,6 @@ class MonkeyTest:
         self.root.title('Oeasy')
         self.line = 1  # 用于统计monkey日志的行数
         self.flagWhile = 1  # 循环判断标志位
-        self.t1 = threading.Thread(target=self.executeCmd)
-        self.t2 = threading.Thread(target=self.startReadLog)
         
     def createLogin(self):
         self.frameLogin = Frame()
@@ -150,6 +148,51 @@ class MonkeyTest:
         packages = proc.communicate()[0]
         packages = packages.replace(b'package:', b'').split(b'\n')
         return packages
+
+    def execute(self):
+        # 设备id不为空，运行脚本时其实没有限定设备id，此项主要用来检测是否能运行adb
+        if len(self.entryDevice.get().strip()) == 0:
+            self.labelRemind['text'] = '请输入设备ID'
+            return
+        # 事件次数为数字
+        self.event = self.entryEvent.get().strip()
+        if not self.event.isdigit():
+            self.labelRemind['text'] = '请输入正确的次数'
+            return
+        # seed值为数字
+        self.seed = self.entrySeed.get().strip()
+        if not self.seed.isdigit():
+            self.labelRemind['text'] = '请输入正确的seed'
+            return
+        # 是否忽略crash
+        self.crash = '--ignore-crashes'
+        if self.vCrash.get() == 0:
+            self.crash = ''
+        # 是否忽略ANR
+        self.anr = '--ignore-timeouts'
+        if self.vANR.get() == 0:
+            self.anr = ''
+        # 包名不为空
+        self.pkg = self.entryPkg.get().strip()
+        if len(self.pkg) == 0:
+            self.labelRemind['text'] = '需要填写测试的包名'
+            return
+        # 按钮置灰
+        self.btnExecute['state'] = 'disabled'
+        lTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        self.listInfo.insert(END, lTime + '  Monkey测试开始。。。')
+        # 重置提示语
+        self.labelRemind['text'] = ''
+        # 重置行数
+        self.line = 1
+        # 重置循环标志位
+        self.flagWhile = 1
+        # 运行monkey语句
+        t1 = threading.Thread(target=self.executeCmd)
+        t1.start()
+        # 显示monkey日志
+        t2 = threading.Thread(target=self.startReadLog)
+        t2.start()
     
     def executeCmd(self):
         cmd = 'adb shell monkey -p ' + self.pkg + ' ' + self.crash + ' ' + self.anr + ' --monitor-native-crashes --throttle 1000 -s ' + self.seed + ' -v -v -v ' + self.event + ' >c:/monkey.log'
@@ -183,46 +226,9 @@ class MonkeyTest:
                 lTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 self.listInfo.insert(END, lTime + '  Monkey测试结束！')
                 self.stop()
-        print(self.line, count)
+        # print(self.line, count)
         self.line = count
     
-    def execute(self):
-        # 设备id不为空，运行脚本时其实没有限定设备id，此项主要用来检测是否能运行adb
-        if len(self.entryDevice.get().strip()) == 0:
-            self.labelRemind['text'] = '请输入设备ID'
-            return
-        # 事件次数为数字
-        self.event = self.entryEvent.get().strip()
-        if not self.event.isdigit():
-            self.labelRemind['text'] = '请输入正确的次数'
-            return
-        # seed值为数字
-        self.seed = self.entrySeed.get().strip()
-        if not self.seed.isdigit():
-            self.labelRemind['text'] = '请输入正确的seed'
-            return
-        # 是否忽略crash
-        self.crash = '--ignore-crashes'
-        if self.vCrash.get() == 0:
-            self.crash = ''
-        # 是否忽略ANR
-        self.anr = '--ignore-timeouts'
-        if self.vANR.get() == 0:
-            self.anr = ''
-        # 包名不为空
-        self.pkg = self.entryPkg.get().strip()
-        if len(self.pkg) == 0:
-            self.labelRemind['text'] = '需要填写测试的包名'
-            return
-        # 按钮置灰
-        self.btnExecute['state'] = 'disabled'
-        self.line = 1
-        lTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        self.listInfo.insert(END, lTime + '  Monkey测试开始。。。')
-        # 运行monkey语句
-        self.t1.start()
-        # 显示monkey日志
-        self.t2.start()
 
 m = MonkeyTest()
 m.createLogin()
