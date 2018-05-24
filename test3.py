@@ -1,43 +1,26 @@
 # coding:utf-8
-import threading
+import requests,time
 
-
-class TestThread(threading.Thread):
-
-    def __init__(self, thread_num=0, timeout=1.0):
-        super(TestThread, self).__init__()
-        self.thread_num = thread_num
-
-        self.stopped = False
-        self.timeout = timeout
-
-    def run(self):
-        def target_func():
-            pass
-            # inp = raw_input("Thread %d: " % self.thread_num)
-            # print('Thread %s input %s' % (self.thread_num, inp))
-        subthread = threading.Thread(target=target_func, args=())
-        subthread.setDaemon(True)
-        subthread.start()
-
-        while not self.stopped:
-            subthread.join(self.timeout)
-
-        print('Thread stopped')
-
-    def stop(self):
-        self.stopped = True
-
-    def isStopped(self):
-        return self.stopped
-
-thread = TestThread()
-thread.start()
-
-import time
-print('Main thread Wainting')
-time.sleep(2)
-
-thread.stop()
-thread.join()
-
+cookie_106='JSESSIONID=4A98744A27742CEFC7A0CA31B52B01D2; eid01=wKgAalqx+H8R8UWzAwSqAg=='
+cookie=cookie_106
+cardId = 1
+code = 1
+for card in range(100,501):
+    #添加门禁
+    url='https://testone.0easy.com/yihao01-ecommunity-cloud/manage/nfcCardAction!insertNfcData.do'
+    dict_all={
+        'unitId':'971379',
+        'cardId': 'e0000000000' + str(card),
+        'cdoe':'0524'+str(code),
+        'roomCode':'01010101',
+        'rightStr':'101,102,103,104,105,106,107,108,109,110,112,113,114,115',
+        'type':'2',
+        'isAutoFlag':'false',
+        'begindate':'2018-05-24',
+        'enddate':'2019-05-24',
+        'userCardType':''
+    }
+    result=requests.post(url,params=dict_all,headers={'Cookie':cookie},verify=False)
+    print(result.status_code)
+    print(result.content.decode('utf-8'))
+    time.sleep(0.5)

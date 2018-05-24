@@ -2,7 +2,7 @@
 import logging
 from datetime import datetime
 from uiautomator import device as d
-import rza.c.getconfigs as getconfigs
+import mobile_test.c.getconfigs as getconfigs
 
 def log(message,filename="gps"):
 	'''
