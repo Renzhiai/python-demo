@@ -7,8 +7,8 @@ addr_28=''
 addr_106=''
 addr=addr_106
 cookie=cookie_106
-#添加门禁
-def add_door():
+#添加脱机门禁
+def addOfflineDoor():
     url=addr+'/yihao01-ecommunity-cloud/manage/doorAction!addDoor.do'
     dict_all={
         'doorModel.id':'',
@@ -38,7 +38,7 @@ def add_door():
         return u'门禁添加失败'
 
 #添加门禁工程师
-def add_door_engineer():
+def addDoorEngineer():
     url=addr+'/yihao01-ecommunity-cloud/manage/doorEngineerAction!addDoorEngineer.do'
     dict_all={
         'id':'',

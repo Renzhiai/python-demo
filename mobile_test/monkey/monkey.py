@@ -10,7 +10,7 @@ import os
 class MonkeyTest:
     def __init__(self):
         self.root = Tk()
-        self.root.title('Oeasy')
+        self.root.title('0easy')
         self.line = 1  # 用于统计monkey日志的行数
         self.flagWhile = 1  # 循环判断标志位
         
@@ -48,7 +48,7 @@ class MonkeyTest:
     def login(self):
         username = self.entryUsername.get().strip()
         password = self.entryPassword.get().strip()
-        if username == 'oeasy' and password == '123456':
+        if username == 'monkey' and password == '123456':
             self.labelReminder['text'] = '登录成功'
             self.frameLogin.destroy()   # 销毁登录页面
             self.createRun()    # 创建monkey运行界面
@@ -137,17 +137,6 @@ class MonkeyTest:
             result = f.readlines()[1].split('\t')[0]
         self.entryDevice.delete(0, END) # 清空设备id编辑框
         self.entryDevice.insert(0, result)  # 填写设备id
-    
-    def getPkgs(self):
-        '''
-        获取手机上所有'com.'开头的包
-        :return:
-        '''
-        cmd = 'adb shell pm list packages |find "com."'
-        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
-        packages = proc.communicate()[0]
-        packages = packages.replace(b'package:', b'').split(b'\n')
-        return packages
 
     def execute(self):
         # 设备id不为空，运行脚本时其实没有限定设备id，此项主要用来检测是否能运行adb
