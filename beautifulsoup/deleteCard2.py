@@ -4,7 +4,7 @@ import time
 
 cookie_106 = 'JSESSIONID=A1DA92973F5DFBF089D392099E868E6C; eid01=wKgAalqx+H8R8UWzAwSqAg=='
 cookie = cookie_106
-for card in range(0, 1000):
+for card in range(0, 9999):
     if card < 10:
         cardId = '000' + str(card)
     elif card >= 10 and card < 100:
