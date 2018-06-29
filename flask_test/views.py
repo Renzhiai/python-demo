@@ -1,7 +1,6 @@
 # coding:utf-8
 import warnings
-from flask import Flask,request,render_template
-from interface_test.model import *
+from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
 
 warnings.filterwarnings('ignore')
