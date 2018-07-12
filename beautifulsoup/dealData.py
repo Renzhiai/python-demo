@@ -41,7 +41,7 @@ def getAllUserId():
         print('没有获取到总页数')
     return 0
     
-def deleteUseById():
+def deleteUserById():
     userIds = getAllUserId()
     i = 0   #用于统计删除的用户的数量
     for id in userIds:

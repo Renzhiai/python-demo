@@ -2,9 +2,17 @@
 import requests
 import time
 
-cookie_106 = 'JSESSIONID=A1DA92973F5DFBF089D392099E868E6C; eid01=wKgAalqx+H8R8UWzAwSqAg=='
-cookie = cookie_106
-for card in range(0, 1000):
+cookie106 = ''
+cookie28 = ''
+host106 = 'https://testone.0easy.com'
+host28 = 'https://01.0easy.com'
+host = host106
+cookie = cookie106
+unitId = '971379'
+roomCode = '01010101'
+
+#卡号是有规律地生成，直接通过规律循环注销
+for card in range(0, 2000):
     if card < 10:
         cardId = '000' + str(card)
     elif card >= 10 and card < 100:
@@ -14,12 +22,12 @@ for card in range(0, 1000):
     else:
         cardId = str(card)
 
-    # 添加门禁
-    url = 'https://testone.0easy.com/yihao01-ecommunity-cloud/manage/nfcCardAction!delNfcRecord.do'
+    # 注销发卡
+    url = host + '/yihao01-ecommunity-cloud/manage/nfcCardAction!delNfcRecord.do'
     dict_all = {
-        'unitId': '971379',
-        'roomCode': '01010101',
-        'cardId': 'fd00000000' + cardId,
+        'unitId': unitId,
+        'roomCode': roomCode,
+        'cardId': 'e000000000' + cardId,
         'cardType': '2'
     }
     result = requests.post(url, params=dict_all, headers={'Cookie': cookie}, verify=False)
