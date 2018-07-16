@@ -60,7 +60,6 @@ def deleteDoor():
     else:
         print('删除失败')
         
-def
 if __name__ == '__main__':
     # selectDoor()
     # addOfflineDoor()
