@@ -3,13 +3,13 @@ import requests
 import time
 import re
 from bs4 import BeautifulSoup
+import warnings
+warnings.filterwarnings("ignore")
 
-cookie106 = ''
-cookie28 = 'plf=/manage/systemAction!centerInfoShow.do; JSESSIONID=378D71082871D483B51DC4FC6F9F5080; eid01=wKgAyFqxsvsYJktrPLSnAg==; UM_distinctid=1644a29cbe6279-0143d8149ef771-3e3d5f01-1fa400-1644a29cbe75aa'
-host106 = 'https://testone.0easy.com'
-host28 = 'https://01.0easy.com'
-host = host28
-cookie = cookie28
+#卡号无规律，通过爬虫抓取卡号，然后使用接口删除
+
+host = 'https://testone.0easy.com'
+cookie = 'plf=/manage/systemAction!centerInfoShow.do;UM_distinctid=1644a29cbe6279-0143d8149ef771-3e3d5f'
 unitId = '971379'
 roomCode = '01010101'
 
@@ -35,17 +35,18 @@ def getAllCardId():
     cardIds = []  # 用于保存获取到的卡号
     totalPage = getTotalPage()
     for i in range(int(totalPage)):
-        #页码规律是
-        page = (int(i) - 1) * 10
+        #页码规律是每翻一页page增大10，第一页page是0，第二个page是10，第三页page是20，第四页page是30，以此类推
+        page = int(i) * 10
         urlFindByPage = host + '/yihao01-ecommunity-cloud/manage/doorAction!nfcList.do?pager.offset=' + str(page)
-        
         result = requests.get(urlFindByPage, headers={'Cookie': cookie},verify=False)
         bsObj = BeautifulSoup(result.content.decode('utf-8'))
-        for line in result.content.decode('utf-8').split('\n'):
-            if "detail('" in line:
-                startIndex = line.find("detail('")
-                endIndex = line.find("')\" value")
-                cardIds.append(line[startIndex+8:endIndex])
+        #找到表格tr
+        itemList = bsObj.findAll('tr', {'class': 'text-c'})
+        for item in itemList:
+            s=item.findAll('td',limit=3)
+            if len(s)>2:
+                cardIds.append(s[2].get_text())
+                print('卡号:'+s[2].get_text())
         time.sleep(0.1)
     return cardIds
 
@@ -56,8 +57,8 @@ def deleteCardById():
         # 注销卡
         url = host + '/yihao01-ecommunity-cloud/manage/nfcCardAction!delNfcRecord.do'
         dict_all = {
-            'unitId': '971379',
-            'roomCode': '01010101',
+            'unitId': unitId,
+            'roomCode': roomCode,
             'cardId': cardId,
             'cardType': '2'
         }

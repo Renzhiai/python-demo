@@ -1,12 +1,8 @@
 # coding:utf-8
 import requests
 
-cookie_28='plf=/; route=6a2329437bbf04787f355e73aee70557; JSESSIONID=E26C2D4E9BA9EC592AFB662ACA289C40; eid01=wKgAyFnxfpl3DG0GAx5jAg=='
-cookie_106='JSESSIONID=FD9498FE3D93CBE48764F0DEE70FAB33; eid01=wKgAalqx+H8R8UWzAwSqAg==; TOKEN=43a039766213a5e36ec6e05edb897cc2_f6c80e3f0f4a499c89a57f4026be2362'
-addr_28=''
-addr_106='https://testapp.0easy.com'
-addr=addr_106
-cookie=cookie_106
+cookie='plf=/; route=6a2329437bbf04787f355e73aee70557; JSESSIONID=E26C2D4E9BA9EC592AFB662ACA289C40; eid01=wKgAyFnxfpl3DG0GAx5jAg=='
+addr=''
 #添加脱机门禁
 def addOfflineDoor():
     url=addr+'/yihao01-ecommunity-cloud/manage/doorAction!addDoor.do'

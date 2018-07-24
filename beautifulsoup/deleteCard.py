@@ -2,16 +2,13 @@
 import requests
 import time
 
-cookie106 = ''
-cookie28 = ''
-host106 = 'https://testone.0easy.com'
-host28 = 'https://01.0easy.com'
-host = host106
-cookie = cookie106
+#卡号是有规律地生成，直接通过规律循环注销
+
+host = ''
+cookie = ''
 unitId = '971379'
 roomCode = '01010101'
 
-#卡号是有规律地生成，直接通过规律循环注销
 for card in range(0, 2000):
     if card < 10:
         cardId = '000' + str(card)

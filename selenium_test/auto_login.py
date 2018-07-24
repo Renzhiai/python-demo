@@ -85,7 +85,7 @@ def log_in_eshop(driver,username,password):
     #统计识别次数
     n = 0
     #识别5次验证码，如果5次都没识别出来，测试fail
-    while driver.current_url == '你的登录网站' and n < 5:
+    while driver.current_url == 'https://testone.0easy.com/yihao01-eshop-web/loginPage' and n < 5:
         driver.find_element_by_name("userName").clear()
         driver.find_element_by_name("userName").send_keys(username)
         driver.find_element_by_name("password").clear()
@@ -104,11 +104,11 @@ def log_in_eshop(driver,username,password):
         return True
     
 if __name__ == '__main__':
-    url = '你的登录网站'
+    url = 'https://testone.0easy.com/yihao01-eshop-web/loginPage'
     driver = webdriver.Chrome()
     driver.maximize_window()
     driver.get(url)
     time.sleep(2)
-    usename = '你的账号'
-    password = '你的密码'
+    usename = ''
+    password = ''
     log_in_eshop(driver, usename, password)
