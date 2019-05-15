@@ -1,5 +1,5 @@
 # coding:utf-8
-from Tkinter import *
+from tkinter import *
 
 #初始化界面
 # app = Tk()

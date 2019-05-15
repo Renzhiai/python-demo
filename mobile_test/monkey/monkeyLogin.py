@@ -4,7 +4,7 @@ from tkinter import *
 def login():
 	username = entryUsername.get().strip()
 	password = entryPassword.get().strip()
-	if username == 'oeasy' and password == '123456':
+	if username == 'Test' and password == '123456':
 		labelReminder['text'] = '登录成功'
 		app.destroy()
 		# makeWidgetInRun(app)
@@ -28,7 +28,7 @@ padxTitle, padyTitle = 150, 20
 padxLabel, padyLabel = 10, 10
 padxEntry = 20
 
-root.title('Oeasy')
+root.title('Test')
 app = Frame()
 
 app.pack()

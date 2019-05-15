@@ -1,5 +1,5 @@
 # coding:utf-8
-from Tkinter import *
+from tkinter import *
 import tkMessageBox
 
 class Application(Frame):

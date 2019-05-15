@@ -11,11 +11,11 @@ WaitTime是总的耗时，包括前一个应用Activity pause的时间和新应�
 如果只关心某个应用自身启动耗时，参考TotalTime；我们需要关注的也是这个时间
 如果关心系统启动应用耗时，参考WaitTime；
 
-adb shell am start -W com.oecommunity.oeshop/.component.main.activity.MainActivity
+adb shell am start -W com.android.settings/.component.main.activity.MainActivity
 '''
 
 #要测试的包
-package_name='com.oecommunity.oeshop'
+package_name='com.android.settings'
 #要测试的activity
 activity_name='.component.main.activity.MainActivity'
 #执行的命令

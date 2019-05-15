@@ -13,7 +13,7 @@ desired_caps['deviceName'] = '186c3498'     #TCL
 # desired_caps['appPackage'] = 'com.android.settings'
 # desired_caps['appActivity'] = '.Settings'
 
-desired_caps['appPackage'] = 'com.oecommunity.oeshop'
+desired_caps['appPackage'] = 'com.android.settings'
 desired_caps['appActivity'] = '.component.intro.activity.WelcomeActivity'
 
 driver = webdriver.Remote('http://127.0.0.1:4723/wd/hub', desired_caps)

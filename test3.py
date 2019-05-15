@@ -13,7 +13,7 @@ for card in range(1,500):
     else:
         cardId = str(card)
     #添加门禁
-    url='https://testone.0easy.com/yihao01-ecommunity-cloud/manage/nfcCardAction!insertNfcData.do'
+    url='/yihao01-ecommunity-cloud/manage/nfcCardAction!insertNfcData.do'
     dict_all={
         'unitId':'971379',
         'cardId': 'e0000000000' + cardId,

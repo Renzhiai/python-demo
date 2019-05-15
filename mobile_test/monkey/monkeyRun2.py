@@ -10,7 +10,7 @@ import os
 class MonkeyTest:
 	def __init__(self):
 		self.root = Tk()
-		self.root.title('Oeasy')
+		self.root.title('Test')
 		self.line = 1       # 用于统计monkey日志的行数
 		self.result = []    # 根据日志的行数变化来判定monkey是否停止
 		self.flagWhile = 1  # 循环判断标志位

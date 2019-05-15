@@ -5,7 +5,7 @@ import time
 def login():
 	username = entryUsername.get().strip()
 	password = entryPassword.get().strip()
-	if username == 'oeasy' and password == '123456':
+	if username == 'test' and password == '123456':
 		labelReminder['text'] = '登录成功'
 	else:
 		entryPassword.delete(0, END)
@@ -30,7 +30,7 @@ padxTitle,padyTitle = 150,20
 padxLabel,padyLabel = 10,10
 padxEntry = 20
 
-app.title('Oeasy')
+app.title('Test')
 # texts=['Monkey测试工具','','账号：','','密码：','','  登录  ','  退出  ','']
 # fonts=[('微软雅黑', 20),'','','','','','','','']
 # stickys=['','','E','W','E','W','E','','W+E']

@@ -4,7 +4,7 @@ from tkinter import *
 class MonkeyTest:
 	def __init__(self):
 		self.root =Tk()
-		self.root.title('Oeasy')
+		self.root.title('Test')
 
 	def createLogin(self):
 		self.frameLogin = Frame()
@@ -40,7 +40,7 @@ class MonkeyTest:
 	def login(self):
 		username = self.entryUsername.get().strip()
 		password = self.entryPassword.get().strip()
-		if username == 'oeasy' and password == '123456':
+		if username == 'test' and password == '123456':
 			self.labelReminder['text'] = '登录成功'
 			self.frameLogin.destroy()
 		else:

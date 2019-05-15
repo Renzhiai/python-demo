@@ -4,13 +4,13 @@ import time
 
 #每隔一段时间获取指定app的cpuinfo
 '''
-adb shell dumpsys cpuinfo | find "com.oecommunity.oeshop"
+adb shell dumpsys cpuinfo | find "com.android.settings"
 '''
 
 #设置结果保存路径
 csv_path='d:/autoTest/cpuinfo.csv'
 #需要测试的包
-packageName='com.oecommunity.oeshop'
+packageName='com.android.settings'
 #测试次数
 times=100
 #测试时间间隔，单位秒
