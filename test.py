@@ -5,7 +5,7 @@ from datetime import datetime
 import sys
 from math import sqrt
 from collections import Counter
-
+import random
 
 # while True:
 #     if d(resourceId='com.tcl.eshow:id/iv_qr_code_content').wait.exists():
@@ -59,3 +59,5 @@ from collections import Counter
 # a = 110
 # print(100 < a < 150)
 
+a = '123456'
+print(random.choices(a))

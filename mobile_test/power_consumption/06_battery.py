@@ -4,7 +4,7 @@ import time
 
 #获取app的耗电量
 '''
-adb shell dumpsys package com.oecommunity.oeshop | find "userId"
+adb shell dumpsys package com.android.settings | find "userId"
 adb shell dumpsys batterystats --reset
 adb shell dumpsys batterystats >d:/battery.txt
 在文档里面搜索Estimated power use

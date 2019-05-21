@@ -8,43 +8,6 @@ unitId = '5555'
 doorCode = '255'
 verifyStr = ''
 
-def selectDoor():
-    url = host + '/yihao01-ecommunity-cloud/manage/doorAction!findDoorList.do'
-    result = requests.post(url, headers={'Cookie':cookie},verify=False)
-    # print(result.status_code)
-    # print(result.content.decode('utf-8'))
-    if '增加联网门禁' in result.content.decode('utf-8'):
-        print('门禁查询成功')
-    else:
-        print('门禁查询失败')
-    
-def addOfflineDoor():
-    url = host + '/yihao01-ecommunity-cloud/manage/doorAction!addDoor.do'
-    args = {
-        'doorModel.id': '',
-        'doorModel.adrWifiPowerBase': '-55',
-        'doorModel.adrBtPowerBase': '-100',
-        'doorModel.iosBtPowerBase': '-100',
-        'doorModel.propId': unitId,
-        'doorModel.doorName': 'interfaceTest',
-        'doorModel.doorCode': doorCode,
-        'doorModel.version': 'OEASY-X1',
-        'doorModel.doorType': '1',
-        'doorModel.doorPublic': '2',
-        'doorModel.createPwd': '0',
-        'doorModel.sn': '',
-        'doorModel.adrWifiPower': '-55',
-        'doorModel.adrBtPower': '-100',
-        'doorModel.iosBtPower': '-100'
-    }
-    result = requests.post(url, params=args, headers={'Cookie':cookie},verify=False)
-    print(result.status_code)
-    print(result.content.decode('utf-8'))
-    if '增加成功' in result.content.decode('utf-8') or '已经使用，请更换门禁编码' in result.content.decode('utf-8'):
-        print('门禁添加成功')
-    else:
-        print('门禁添加失败')
-        
 def deleteDoor():
     url = host + '/yihao01-ecommunity-cloud/manage/doorAction!delRd.do'
     args = {
@@ -52,15 +15,15 @@ def deleteDoor():
         'propId':'5555',
         'doorCode':'255'
     }
-    result = requests.post(url, params=args, headers={'Cookie': cookie}, verify=False)
-    # print(result.status_code)
-    # print(result.content.decode('utf-8'))
-    if '增加联网门禁' in result.content.decode('utf-8'):
+    headers = {
+        'Cookie': cookie
+    }
+    res = requests.post(url, params=args, headers=headers, verify=False)
+    res = res.content.decode('utf-8')
+    if '增加联网门禁' in res.content.decode('utf-8'):
         print('删除成功')
     else:
         print('删除失败')
         
 if __name__ == '__main__':
-    # selectDoor()
-    # addOfflineDoor()
     deleteDoor()

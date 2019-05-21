@@ -1,5 +1,5 @@
 # coding = utf-8
-from interface_test.dbSearch import myDb
+from sql_demo.dbSearch import myDb
 
 host = ''
 port = 3306
