@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# _*_ coding:utf-8 _*_
+# coding = utf-8
 
 import os,sys
 here = os.path.abspath(os.path.dirname(__file__))
@@ -103,4 +103,4 @@ def delete_file(filename, record_id):
 init()  # initializing the database
 
 if __name__ == '__main__':
-    app.run(HOST, debug=DEBUG, port=8081)
+    app.run(HOST, debug=DEBUG, port=8001)

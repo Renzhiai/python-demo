@@ -11,7 +11,10 @@
 <div class="header">
     <h1>{{ name }} - 预览</h1>
     <h2><a href="{{ url_for("download_testlink_file",filename= name,mode=1) }}">下载XML文件</a>
-        / <a href="{{ url_for("download_robot_file",filename= name,mode=1) }}">下载ROBOT文件</a>
+        / <a href="{{ url_for("download_robot_file",filename= name,mode=1) }}">下载ROBOT文件</a><br>
+        <b>如果想要根据用例名称来自动补全测试步骤和预期结果，请点击右边的链接：</b>
+        / <a href="{{ url_for("download_testlink_file",filename= name,mode=2) }}">下载XML文件</a>
+        / <a href="{{ url_for("download_robot_file",filename= name,mode=2) }}">下载ROBOT文件</a><br>
         / <a href="{{ url_for("index") }}">返回首页</a></h2>
 </div>
 <table class="pure-table tests-table">
@@ -45,9 +48,7 @@
     </tbody>
 </table>
 <div class="footer">
-    <a href="{{ url_for('static', filename='guide/index.html') }}" target="_blank">User Guide</a> |
-    <a href="https://github.com/zhuifengshen/xmind2testcase/issues/new" target="_blank">Report Issue</a> |
-    Powered by <a href="https://github.com/zhuifengshen/xmind2testcase" target="_blank">XMind2TestCase</a>
+
 </div>
 </body>
 </html>

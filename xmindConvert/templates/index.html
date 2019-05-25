@@ -33,9 +33,9 @@
                         <tr>
                             <td title="{{ record[1] }}"> {{ record[0] }}</td>
                             <td>{{ record[2] }}</td>
-                            <td><a href="{{ url_for('uploaded_file',filename=record[1]) }}">XMIND</a> |
+                            <td><a href="{{ url_for('uploaded_file',filename=record[1]) }}">xmind文件</a> |
                                 <a href="{{ url_for('preview_file',filename=record[1]) }}">预览</a> |
-                                <a href="{{ url_for('delete_file',filename=record[1], record_id=record[4]) }}">DELETE</a>
+                                <a href="{{ url_for('delete_file',filename=record[1], record_id=record[4]) }}">删除</a>
                             </td>
                         </tr>
                     {% endfor %}
