@@ -12,7 +12,7 @@ if __name__=='__main__':
 	print("父进程"+str(os.getpid()))
 	#target一般是一个可调用对象，比如函数
 	#args:该函数的参数，需要使用tuple
-	p=Process(target=proc,args=('test',))
+	p=Process(target=proc,args=('tcs',))
 	print('子进程启动')
 	p.start()
 	p.join()

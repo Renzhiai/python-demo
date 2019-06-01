@@ -15,7 +15,7 @@ print(os.path.join(os.path.abspath("."),"testdir"))
 #要拆分路径时，也不要直接去拆字符串，而要通过os.path.split()函数
 
 #得到文件扩展名
-print(os.path.splitext("f:/test/aa.txt"))
+print(os.path.splitext("f:/tcs/aa.txt"))
 
 #列出当前目录下的所有目录
 print([x for x in os.listdir(".") if os.path.isdir(x)])

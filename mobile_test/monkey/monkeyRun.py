@@ -197,7 +197,7 @@ def makeWidgetInRun(app):
 	btnStop.grid(row=rowExecute, column=1, sticky=W, padx=padxButton)
 	
 	# 调试
-	# btnTest = Button(app, text='  调试  ', command=test)
+	# btnTest = Button(app, text='  调试  ', command=tcs)
 	# btnTest.grid(row=rowExecute, column=2, sticky=E)
 	
 	# 展示信息

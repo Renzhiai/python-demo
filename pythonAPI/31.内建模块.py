@@ -29,7 +29,7 @@ p=point(1,2)
 print(p.x,p.y)
 
 #base64编解码
-b=base64.b64encode(b"f:/test/aa.txt")
+b=base64.b64encode(b"f:/tcs/aa.txt")
 print(b)
 fb=base64.b64decode(b)
 print(fb)

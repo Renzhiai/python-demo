@@ -5,7 +5,7 @@ host = ''
 port = 3306
 user = 'root'
 pwd = '123456'
-database = 'test'
+database = 'tcs'
 value = '李云'
 
 db = myDb.MyDatabase(host, port, user, pwd, database)

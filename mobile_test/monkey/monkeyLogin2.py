@@ -40,7 +40,7 @@ class MonkeyTest:
 	def login(self):
 		username = self.entryUsername.get().strip()
 		password = self.entryPassword.get().strip()
-		if username == 'test' and password == '123456':
+		if username == 'tcs' and password == '123456':
 			self.labelReminder['text'] = '登录成功'
 			self.frameLogin.destroy()
 		else:

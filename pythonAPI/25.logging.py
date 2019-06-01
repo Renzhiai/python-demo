@@ -40,7 +40,7 @@ format参数中可能用到的格式化串：
 logging.basicConfig(level=logging.DEBUG,
 					format="%(asctime)s %(filename)s [line:%(lineno)d] %(levelname)s %(message)s",
 					#datefmt="%a, %d %b %Y %H:%M:%S",
-					filename="c:/test.log",
+					filename="c:/tcs.log",
 					filemode="w")
 								
 logging.debug("debug message")
@@ -55,7 +55,7 @@ logger=logging.getLogger("aaa")
 #设置日志等级
 logger.setLevel(logging.DEBUG)
 #创建一个handler，用于写入日志文件
-fh=logging.FileHandler("d:/test.log")
+fh=logging.FileHandler("d:/tcs.log")
 #创建一个handler，用于输出到控制台
 sh=logging.StreamHandler()
 # 定义handler的输出格式formatter

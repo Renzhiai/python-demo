@@ -5,7 +5,7 @@ import time
 def login():
 	username = entryUsername.get().strip()
 	password = entryPassword.get().strip()
-	if username == 'test' and password == '123456':
+	if username == 'tcs' and password == '123456':
 		labelReminder['text'] = '登录成功'
 	else:
 		entryPassword.delete(0, END)

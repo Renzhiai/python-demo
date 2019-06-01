@@ -7,10 +7,10 @@ d=dict(name="Bob",age=20,score=100)
 #pickle.dumps()方法把任意对象序列化成一个 bytes，然后就可以把这个 bytes 写入文件
 print(pickle.dumps(d))
 
-with open("f:/test/dump.txt","wb") as f:
+with open("f:/tcs/dump.txt","wb") as f:
 	pickle.dump(d,f)
 
 #反序列化刚才保存的对象
-with open("f:/test/dump.txt","rb") as f:
+with open("f:/tcs/dump.txt","rb") as f:
 	d=pickle.load(f)
 print(d)
