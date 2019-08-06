@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# coding = utf-8
+# coding=utf-8
 import os
 import xmind
 from xml.etree.ElementTree import Element, SubElement, ElementTree

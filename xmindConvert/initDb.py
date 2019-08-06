@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# coding = utf-8
+# coding=utf-8
 import sqlite3
 from contextlib import closing
 from xmindConvert.cfg import *

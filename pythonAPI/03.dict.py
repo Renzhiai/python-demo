@@ -17,12 +17,11 @@ print(dict1.get("aaa",0))
 #dict1.pop("fish")
 #默认dict1迭代键
 for key in dict1:
-	print(key)
-	print(dict1[key])
+    print(key)
+    print(dict1[key])
 #dict1迭代值
 for value in dict1.values():
-	print(value)
+    print(value)
 #dict1两个一起迭代
 for key,value in dict1.items():
-	print(key,value)
-	
+    print(key,value)

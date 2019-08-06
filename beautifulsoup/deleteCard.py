@@ -12,15 +12,15 @@ roomCode = '01010101'
 for card in range(0, 2000):
     if card < 10:
         cardId = '000' + str(card)
-    elif card >= 10 and card < 100:
+    elif 10 <= card < 100:
         cardId = '00' + str(card)
-    elif card >= 100 and card < 1000:
+    elif 100 <= card < 1000:
         cardId = '0' + str(card)
     else:
         cardId = str(card)
 
     # 注销发卡
-    url = host + '/yihao01-ecommunity-cloud/manage/nfcCardAction!delNfcRecord.do'
+    url = host + '/manage/nfcCardAction!delNfcRecord.do'
     dict_all = {
         'unitId': unitId,
         'roomCode': roomCode,

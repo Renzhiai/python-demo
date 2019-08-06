@@ -1,0 +1,18 @@
+1.	adb shell
+	cd /system/bin
+	monkey
+	adb shell monkey -h
+2.	adb shell monkey 100		发送100个随机事件
+3.	adb shell monkey -v -v -v 100 		发送100个随机事件并打印日志，-v越多日志越详细
+4.	adb shell monkey -f /mnt/adcard/test 1
+5.	adb shell monkey -s 2 1		重复之前的随机操作，重复2次
+6.	adb shell monkey --throttle 1000 10		发送10个随机事件，每个事件间隔1000毫秒
+7.	adb shell monkey -p 包名 10		针对某包发送10个随机事件
+8.	adb shell monkey -p com.tencent.mm -p com.tencent.qq --throttle 1000 10
+9.	adb shell monkey --pct--touch 100 10	发送10个随机事件，触摸动作占比100%
+10.	adb shell monkey --ignore-crashes 10	发送10个随机事件，无视fc问题
+11.	adb shell monkey --ignore-timeouts 10	发送10个随机事件，无视anr问题
+12.	adb shell monkey --ignore-security-exceptions 10	发送10个随机事件，无视权限问题
+13.	adb shell monkey --kill-process-after-error 10	无视应用程序错误，继续执行
+14.	adb shell monkey --monitor-native-crashes 10	运行native code的崩溃事件被监视并报告
+15.	adb shell monkey -p com.android.settings --ignore-crashes --ignore-timeouts --throttle 500 -v -v -v 9999 >d:/log.txt

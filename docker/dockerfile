@@ -1,0 +1,29 @@
+关键字
+1.FROM ----基础镜像，当前镜像基于哪个镜像
+2.MAINTAINER ----镜像维护者的姓名和邮箱
+3.RUN 
+4.EXPOSE ----当前容器对外暴露的端口
+5.WORKDIR ----容器创建后，登陆进来的默认目录
+6.ENV ----设置环境变量
+7.ADD ----将宿主机的文件拷贝到镜像，会自动解压
+8.COPY ----同ADD，不会自动解压
+9.VOLUME ----创建容器卷
+10.CMD ----容器启动时，要运行的命令，有多个命令，只有最后一个生效，这个命令会被doker run之后的参数替换
+11.ENTRYPOINT ----同CMD，在docker run之后添加参数，是追加效果
+12.ONBUILD ----父镜像在被子镜像继承时，父镜像的onbuild会被触发
+
+
+FROM centos
+VOLUME ["/backup1","/backup2"]
+CMD echo "finished~~~~~~~~"
+CMD /bin/bash
+
+FROM centos
+ENV mypath /opt
+WORKDIR $mypath
+RUN yum -y install vim
+RUN yum -y install net-tools
+EXPOSE 80
+CMD echo "success======"
+CMD /bin/bash
+

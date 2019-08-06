@@ -1,6 +1,7 @@
 # coding:utf-8
 import requests
 import time
+import arrow
 
 # path = 'c:/captcha.png'
 # path2 = 'c:/imgnew/captcha1.png'
@@ -22,6 +23,6 @@ import time
 
 
 
-
+print(str(arrow.now()))
 
     

@@ -42,7 +42,7 @@ calc()
 
 #4.关键字参数允许你传入 0 个或任意个含参数名的参数，这些关键字参数在函数内部自动组装为一个 dict
 def person(name,age,**kw):
-	print("name:",name,"age:",age,"other:",kw)
+	print("name:",name,"age:",age,"99.other:",kw)
 	
 person("Xiaoming",30)
 person("Xiaoh",18,city="Shenzhen",job="Test")
@@ -57,7 +57,7 @@ def person(name,age,**kw):
 	if "job" in kw:
 		#有job参数
 		pass
-	print("name:",name,"age:",age,"other:",kw)
+	print("name:",name,"age:",age,"99.other:",kw)
 	
 #如果要限制关键字参数的名字，就可以用命名关键字参数
 #如，只接收 city 和 job 作为关键字参数，name，age是位置参数，*是特殊分隔符

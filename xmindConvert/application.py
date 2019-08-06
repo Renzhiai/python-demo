@@ -1,10 +1,14 @@
 #!/usr/bin/env python
-# coding = utf-8
+# coding=utf-8
+import logging
+logging.basicConfig(level=logging.DEBUG,format='%(asctime)s - %(filename)s - %(levelname)s : %(message)s')
 
 import os,sys
 here = os.path.abspath(os.path.dirname(__file__))
+logging.info(here)
 rootPath = os.path.split(here)[0]
-sys.path.append(rootPath)
+logging.info(rootPath)
+# sys.path.append(rootPath)
 
 from xmindConvert.initDb import *
 from xmindConvert.control import *
