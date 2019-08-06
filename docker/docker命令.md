@@ -12,8 +12,8 @@
 4. 重启docker：systemctl  restart docker
 
 ### 基础命令
-命令 | 作用
-- | -
+|命令 | 作用|
+|-|-|
 docker version | 查看版本
 docker info | 
 docker ps | 查询正在运行的容器
@@ -35,8 +35,8 @@ docker inspect 容器NAME或者ID | 查看容器信息
 docker cp NAMEID:/root/test.txt /opt/| 从容器里面拷贝文件到opt
 
 ### 启动命令
-命令 | 作用
-- | -
+|命令 | 作用|
+|- | -|
 docker run -it --name cont 镜像NAME或ID | 交互式启动容器并指定一个别名
 docker run -it -p 8888:8080 tomcat| 启动tomcat，docker端口为8888
 docker run -it -P tomcat| 启动tomcat，随机指定docker端口
@@ -52,8 +52,8 @@ docker kill NAME或者ID | 强制停止
 docker commit -a='rza' -m 'tomcat test' 2dc24fb474c0 rza/tomcat:1.2| 生成新的docker镜像
 
 ### 容器卷
-命令|作用
--|-
+|命令|作用|
+|-|-|
 docker run -it -v 宿主机路径:/容器路径 镜像名| 生成两个对应的文件夹，宿主机和容器共享
 docker build -f /opt/mydocker/Dockerfile -t rza_centos . | 用dockerfile构建镜像
 docker inspect 容器id | 查看容器相关信息 
