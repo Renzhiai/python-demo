@@ -4,10 +4,6 @@
 dict1 = {"fish":15,"pig":18,"dog":28}
 dict2 = {"fish1":12,"pig1":11,"dog1":21}
 print(dict1["fish"])
-#True
-print("fish" in dict1)
-#False
-print("aaa" in dict1)
 #验证Key是否存在，不存在返回None，存在就返回value
 print(dict1.get("fish"))
 #验证Key是否存在，不存在返回null或者0，存在就返回value
