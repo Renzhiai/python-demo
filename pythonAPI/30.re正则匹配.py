@@ -29,14 +29,20 @@ import re
 #r2=re.match(r"[0-9a-zA-Z\_][0-9a-zA-Z\_]*","a")
 #r2=re.split(r"\s+","a,b,c ,d e")
 
-r2=re.match(r"(0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])","20:02:09")
+r2 = re.match("(0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])","20:02:09")
 print(r2.group(0))
 print(r2.group(1))
 print(r2.group(2))
 print(r2.group(3))
 
 #正则匹配默认是贪婪匹配，加个？采用非贪婪匹配
-r3=re.match("^(\d+)(0*)$","12000")
-r4=re.match("^(\d+?)(0*)$","12000")
+r3 = re.match("^(\d+)(0*)$","12000")
+r4 = re.match("^(\d+?)(0*)$","12000")
 print(r3.groups())
 print(r4.groups())
+
+# 查找匹配项
+l = ['12345', '234', '333']
+res = re.compile('123')
+for i in l:
+    print(res.findall(i))

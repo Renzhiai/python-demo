@@ -9,14 +9,14 @@ warnings.filterwarnings("ignore")
 #卡号无规律，通过爬虫抓取卡号，然后使用接口删除
 
 host = ''
-cookie = 'plf=/manage/systemAction!centerInfoShow.do;UM_distinctid=1644a29cbe6279-0143d8149ef771-3e3d5f'
+cookie = ''
 unitId = '971379'
 roomCode = '01010101'
 
 def getTotalPage():
     '''获取总页数'''
     totalPage = ''  # 数据所显示的页数
-    urlFind = host + '/manage/doorAction!nfcList.do'
+    urlFind = host + '/manage/nfcList'
     result = requests.get(urlFind, headers={'Cookie': cookie}, verify=False)
     for line in result.content.decode('utf-8').split('\n'):
         kw = re.findall(re.compile('条(.*?)页'),line)
@@ -37,7 +37,7 @@ def getAllCardId():
     for i in range(int(totalPage)):
         #页码规律是每翻一页page增大10，第一页page是0，第二个page是10，第三页page是20，第四页page是30，以此类推
         page = int(i) * 10
-        urlFindByPage = host + '/manage/doorAction!nfcList.do?pager.offset=' + str(page)
+        urlFindByPage = host + '/manage/nfcList?page=' + str(page)
         result = requests.get(urlFindByPage, headers={'Cookie': cookie},verify=False)
         bsObj = BeautifulSoup(result.content.decode('utf-8'))
         #找到表格tr

@@ -2,9 +2,9 @@
 import logging
 
 try:
-	print(10/0)
+    print(10/0)
 except Exception as e:
-	logging.exception(e)
+    logging.exception(e)
 
 #日志级别等级CRITICAL > ERROR > WARNING > INFO > DEBUG > NOTSET
 #默认的日志格式为  日志级别：Logger名称：用户输出消息。
@@ -38,11 +38,11 @@ format参数中可能用到的格式化串：
 %(message)s用户输出的消息
 
 logging.basicConfig(level=logging.DEBUG,
-					format="%(asctime)s %(filename)s [line:%(lineno)d] %(levelname)s %(message)s",
-					#datefmt="%a, %d %b %Y %H:%M:%S",
-					filename="c:/tcs.log",
-					filemode="w")
-								
+                    format="%(asctime)s %(filename)s [line:%(lineno)d] %(levelname)s %(message)s",
+                    #datefmt="%a, %d %b %Y %H:%M:%S",
+                    filename="c:/ttt.log",
+                    filemode="w")
+                                
 logging.debug("debug message")
 logging.info("info message")
 logging.warning("warning message")
@@ -55,7 +55,7 @@ logger=logging.getLogger("aaa")
 #设置日志等级
 logger.setLevel(logging.DEBUG)
 #创建一个handler，用于写入日志文件
-fh=logging.FileHandler("d:/tcs.log")
+fh=logging.FileHandler("d:/ttt.log")
 #创建一个handler，用于输出到控制台
 sh=logging.StreamHandler()
 # 定义handler的输出格式formatter

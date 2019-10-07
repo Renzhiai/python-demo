@@ -20,7 +20,7 @@ for card in range(0, 2000):
         cardId = str(card)
 
     # 注销发卡
-    url = host + '/manage/nfcCardAction!delNfcRecord.do'
+    url = host + '/manage/delNfcRecord'
     dict_all = {
         'unitId': unitId,
         'roomCode': roomCode,
