@@ -18,5 +18,5 @@ if __name__=="__main__":
 	#获得一个图片对象
 	img=Image.open("D:/a7.jpg")
 	#用系统默认看图软件打开图片
-	#img.rotate(45).show()
+	#img.rotate(45).other()
 	add_num(img)

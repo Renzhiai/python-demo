@@ -1,12 +1,12 @@
 # coding = utf-8
-from mysql.dbSearch import myDb
+import myDb
 
 host = ''
 port = 3306
 user = 'root'
 pwd = '123456'
-database = 'tcs'
-value = '李云'
+database = 'test'
+value = '赵雷'
 
 db = myDb.MyDatabase(host, port, user, pwd, database)
 print('进入数据库：{}查找......'.format(db.database))
