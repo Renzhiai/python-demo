@@ -3,7 +3,7 @@
 ./redis-server|
 ./redis-cli|
 config get *					|	获取所有配置
-set score 'a'			|			设置成绩为a，string类型最大存储为512M
+set score 'a'			|			设置score为a，string类型最大存储为512M
 get score					|		获取score的值
 del score				|			删除
 hmset myhash name 'mm' age '19'	|	设置hash键值对，每个hash可以存储232-1键值对(40多亿)

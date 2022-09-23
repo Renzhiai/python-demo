@@ -1,9 +1,18 @@
-#coding: utf-8
+# coding: utf-8
 import random
-letters="qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890"
-code=""
-#code=[]
-for i in range(4):
-	code+=random.choice(letters)
-	#code.append(random.choice(letters))
-print(code)
+import string
+
+
+def get_verification_code(length=4):
+    letters = string.ascii_letters + string.digits
+    code = ''
+    for _ in range(length):
+        # 重复
+        code += random.choice(letters)
+        # 不重复
+        # code += random.sample(letters)
+    return code
+
+
+verification_code = get_verification_code()
+print(verification_code)

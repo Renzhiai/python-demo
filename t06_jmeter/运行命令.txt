@@ -1,0 +1,5 @@
+# 执行脚本
+jmeter -n -t C:\11-11.jmx -l C:\test.jtl -e -o C:\test_dir
+
+# 根据jtl生成报告
+jmeter -g test.jtl -o output
