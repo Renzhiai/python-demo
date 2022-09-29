@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<something>
+    <rool>
+        <user>
+            <content name="user">zhangsan</content>
+            <content name="password">lisi</content>
+<!--            <content name="password" value="wangwu"/>-->
+        </user>
+        <flag>false</flag>
+    </rool>
+</something>
