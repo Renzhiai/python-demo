@@ -4,6 +4,7 @@
 
 l = ["a", "b", "c"]
 print(len(l))  # 3
+
 l.append('d')
 print(l)  # ['a', 'b', 'c', 'd']
 

@@ -1,5 +1,6 @@
 # coding:utf-8
 import warnings
+
 warnings.filterwarnings('ignore')
 
 from urllib.request import urlretrieve
@@ -9,37 +10,40 @@ import os
 
 # html=urlretrieve('http://www.pythonscraping.com/img/gifts/img1.jpg','d:/logo.png')
 
-downloadDirectory='downloaded'
-baseUrl='http://pythonscraping.com'
+downloadDirectory = 'downloaded'
+baseUrl = 'http://pythonscraping.com'
 
-def getAbsoluteURL(baseUrl,source):
+
+def getAbsoluteURL(baseUrl, source):
     if source.startswith('http://www'):
-        url='http://'+source[11:]
+        url = 'http://' + source[11:]
     elif source.startswith('http://'):
-        url=source
+        url = source
     elif source.startswith('www.'):
-        url=source[4:]
-        url='http://'+source
+        url = source[4:]
+        url = 'http://' + source
     else:
-        url=baseUrl+'/'+source
+        url = baseUrl + '/' + source
     if baseUrl not in url:
         return None
     return url
 
-def getDownloadPath(baseUrl,absoluteUrl,downloadDirectory):
-    path=absoluteUrl.replace('www.','')
-    path=path.replace(baseUrl,'')
-    path=downloadDirectory+path
-    directory=os.path.dirname(path)
+
+def getDownloadPath(baseUrl, absoluteUrl, downloadDirectory):
+    path = absoluteUrl.replace('www.', '')
+    path = path.replace(baseUrl, '')
+    path = downloadDirectory + path
+    directory = os.path.dirname(path)
     if not os.path.exists(directory):
         os.makedirs(directory)
     return path
 
-html=urlopen('http://www.pythonscraping.com')
-bsObj=BeautifulSoup(html)
-downloadList=bsObj.findAll(src=True)
+
+html = urlopen('http://www.pythonscraping.com')
+bsObj = BeautifulSoup(html)
+downloadList = bsObj.findAll(src=True)
 for download in downloadList:
-    fileUrl=getAbsoluteURL(baseUrl,download['src'])
+    fileUrl = getAbsoluteURL(baseUrl, download['src'])
     if fileUrl is not None:
         print(fileUrl)
-urlretrieve(fileUrl,getDownloadPath(baseUrl,fileUrl,downloadDirectory))
+urlretrieve(fileUrl, getDownloadPath(baseUrl, fileUrl, downloadDirectory))

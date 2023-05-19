@@ -2,8 +2,8 @@
 2.  adb install <packagename>		
 3.  adb kill-server
 4.  adb logcat >d:/log.txt
-5.  adb logcat | find “com.android.settings” >d:/log.txt
-6.  adb logcat | findstr -i “cmp” >d:/log.txt
+5.  adb logcat | find "com.android.settings" >d:/log.txt
+6.  adb logcat | findstr -i "cmp" >d:/log.txt
 7.  adb logcat | findstr -i ActivityManager >d:/log.txt
 8.  adb logcat thread >d:/log.txt
 9.  adb push d:/test.sh /data/local/tmp
@@ -16,7 +16,7 @@
 16. adb shell cat /sys/class/leds/lcd-backlight/brightness		获取屏幕亮度
 17. adb shell cat /sys/class/net/wlan0/address		获取手机mac地址
 18. adb shell cat /sys/class/power_supply/battery/capacity		获取电池电量
-19. adb shell dumpsys telephony.registry | find “mCallState” 		获取通话状态(Windows)
+19. adb shell dumpsys telephony.registry | find “mCallState" 		获取通话状态(Windows)
     a)	mCallState=0	未通话
     b)	mCallState=1	mCallIncomingNumber=+861772259XXXX	响铃状态
     c)	mCallState=2	通话中
@@ -24,9 +24,9 @@
 21. adb shell getprop ro.product.model		获取设备型号
 22. adb shell pm clear com.android.settings		清除应用数据和缓存
 23. adb shell pm list packages		查看所有包名
-24. adb shell pm list packages | find “camera”		查找包含camera的包名(windows系统)
+24. adb shell pm list packages | find "camera"		查找包含camera的包名(windows系统)
 25. adb shell pm list packages | grep camera		linux系统使用
-26. adb shell pm list packages | findstr “camera”		查找包含camera的包名
+26. adb shell pm list packages | findstr "camera"		查找包含camera的包名
 27. adb shell input keyevent 3		按Home键
 28. adb shell input keyevent 4		按back键
 29. adb shell input keyevent 6		挂断电话

@@ -15,7 +15,7 @@ toAddr = ''
 msg = MIMEText('<h1 style="color:red">出来上网啊</h1>', 'html', 'utf-8')
 msg['From'] = uname
 msg['To'] = toAddr
-msg['Subject'] = Header('发给renzhiai的邮件', 'utf8').encode()
+msg['Subject'] = Header('发给xxx的邮件', 'utf8').encode()
 smtpServer = 'smtp.163.com'
 
 server = smtplib.SMTP(smtpServer, 25)

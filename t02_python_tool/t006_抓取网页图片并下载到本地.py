@@ -1,4 +1,5 @@
-# coding:utf-8
+# coding = utf-8
+# !/usr/bin/python
 import urllib.request
 import re
 import os
@@ -33,6 +34,5 @@ def get_links(url):
 
 
 if __name__ == "__main__":
-    # url="http://www.soupan.info/"
     url = "http://jandan.net/ooxx/page-2017#comments"
     get_links(url)

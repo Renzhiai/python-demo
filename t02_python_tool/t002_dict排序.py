@@ -1,4 +1,5 @@
-# coding:utf-8
+# coding = utf-8
+# !/usr/bin/python
 
 # 这是一个dict
 price = {

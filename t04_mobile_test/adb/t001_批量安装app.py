@@ -12,5 +12,5 @@ def install_app(path):
 
 
 if __name__ == "__main__":
-    path = "C:/Users/zhiai.ren/Desktop/googleAPK"
+    path = "C:/Users/admin/Desktop"
     install_app(path)

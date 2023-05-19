@@ -3,9 +3,9 @@
 import os
 import shutil
 
-jmx_path = 'C:\\Users\\GVT\\Desktop\\jt\\11-11.jmx'
-jtl_path = 'C:\\Users\\GVT\\Desktop\\jtest\\test.jtl'
-report_path = 'C:\\Users\\GVT\\Desktop\\jtest'
+jmx_path = 'C:\\Users\\admin\\Desktop\\jt\\11-11.jmx'
+jtl_path = 'C:\\Users\\admin\\Desktop\\jtest\\test.jtl'
+report_path = 'C:\\Users\\admin\\Desktop\\jtest'
 
 # 删除旧的测试数据
 if os.path.exists(report_path):

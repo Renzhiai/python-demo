@@ -1,6 +1,7 @@
 # coding:utf-8
 # ignore warning
 import warnings
+
 warnings.filterwarnings("ignore")
 
 from urllib.request import urlopen

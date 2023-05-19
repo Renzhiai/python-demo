@@ -16,3 +16,5 @@ print(ord('a'))  # 97
 print(chr(65))  # A
 
 print(3 ** 3)  # 3的3次方等于27
+
+print(divmod(10, 3)) # (3, 1)

@@ -26,6 +26,7 @@ for key in d1:
 # d1迭代值
 for value in d1.values():
     print(value)
+
 # d1迭代键和值
 for key, value in d1.items():
     print(key, value)
