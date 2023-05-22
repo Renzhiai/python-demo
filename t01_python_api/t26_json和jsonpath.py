@@ -79,10 +79,10 @@ $.store..price                          获取json中store下所有price的值
 $..book[2]                              获取json中book数组的第3个值
 $..book[-2]                             倒数的第二本书
 $..book[0,1]                            前两本书
-$..book[:2]	                            从索引0（包括）到索引2（排除）的所有图书
+$..book[:2]                             从索引0（包括）到索引2（排除）的所有图书
 $..book[1:2]                            从索引1（包括）到索引2（排除）的所有图书
 $..book[-2:]                            获取json中book数组的最后两个值
-$..book[2:]	                            获取json中book数组的第3个到最后一个的区间值
+$..book[2:]                             获取json中book数组的第3个到最后一个的区间值
 $..book[?(@.isbn)]                      获取json中book数组中包含isbn的所有值
 $.store.book[?(@.price < 10)]           获取json中book数组中price<10的所有值
 $..book[?(@.price <= $['expensive'])]   获取json中book数组中price<=expensive的所有值
