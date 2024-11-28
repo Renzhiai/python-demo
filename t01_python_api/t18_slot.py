@@ -1,4 +1,4 @@
-# coding:utf-8
+# coding=utf-8
 
 # 只允许对 Student实例添加 name 和 age 属性
 class Student(object):

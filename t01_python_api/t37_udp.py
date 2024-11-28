@@ -1,3 +1,4 @@
+# coding=utf-8
 import socket
 
 # socket.SOCK_DGRAM面向流的UDP协议

@@ -1,4 +1,4 @@
-# coding:utf-8
+# coding=utf-8
 import os, random, time
 import subprocess, queue
 from multiprocessing.managers import BaseManager

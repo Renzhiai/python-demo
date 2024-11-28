@@ -1,5 +1,4 @@
-#!/usr/bin/env
-# coding = utf-8
+# coding=utf-8
 from email.mime.text import MIMEText
 import smtplib
 from email.header import Header

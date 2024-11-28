@@ -1,4 +1,4 @@
-# coding:utf-8
+# coding=utf-8
 import os
 
 # 获取某个环境变量的值

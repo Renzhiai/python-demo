@@ -1,4 +1,4 @@
-# coding:utf-8
+# coding=utf-8
 
 # 需要定义常量时，一个办法是用大写变量通过整数来定义
 from enum import Enum, unique

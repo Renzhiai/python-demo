@@ -1,0 +1,9 @@
+class bkGoodsPos:
+    ID = None
+    SKU = None
+    BARCODE = None
+    HS_CODE = None
+    CODE_TS = None
+    NAME_CH = None
+    NAME_EN = None
+    PRICE = None

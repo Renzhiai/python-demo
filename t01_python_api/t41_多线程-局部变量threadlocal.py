@@ -1,4 +1,4 @@
-# coding:utf-8
+# coding=utf-8
 import threading
 
 # ThreadLocal 最常用的地方就是为每个线程绑定一个数据库连接，HTTP请求，用户身份信息等

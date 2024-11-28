@@ -1,4 +1,4 @@
-# coding:utf-8
+# coding=utf-8
 
 # 1.位置参数：调用函数时，传入的两个值按照位置顺序依次赋给参数 x 和 n
 def power(x):

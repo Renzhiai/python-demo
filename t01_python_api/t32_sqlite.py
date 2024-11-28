@@ -1,5 +1,4 @@
-#!/usr/bin/env
-# coding = utf-8
+# coding=utf-8
 import sqlite3
 
 # 如果文件不存在就创建

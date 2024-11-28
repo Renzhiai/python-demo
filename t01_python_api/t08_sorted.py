@@ -1,4 +1,4 @@
-# coding:utf-8
+# coding=utf-8
 
 l = [3, 4, 6, 1, 9, 5]
 print(sorted(l))

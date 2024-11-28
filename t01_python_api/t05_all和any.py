@@ -1,5 +1,5 @@
-# coding = utf-8
-# !/usr/bin/python
+# coding=utf-8
+
 
 print(all([1, 0, 3, 6]))  # 所有元素都为真， False
 print(all([1, 2, 3]))  # True

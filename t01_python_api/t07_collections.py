@@ -1,4 +1,4 @@
-# coding:utf-8
+# coding=utf-8
 from collections.abc import Iterable
 from collections import Counter
 from collections import defaultdict

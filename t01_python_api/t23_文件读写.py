@@ -1,4 +1,4 @@
-# coding:utf-8
+# coding=utf-8
 
 # #读取UTF-8 编码的文本文件
 # with open("a.txt", mode='r', encoding='utf8') as f:

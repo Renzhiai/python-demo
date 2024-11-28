@@ -1,4 +1,4 @@
-# coding:utf-8
+# coding=utf-8
 # from com.android.monkeyrunner import MonkeyRunner as mr,MonkeyDevice as md,MonkeyImage as mk
 from com.android.monkeyrunner import MonkeyRunner, MonkeyDevice, MonkeyImage
 

@@ -1,6 +1,4 @@
-# coding:utf-8
-#!/usr/bin/python3
-
+# coding=utf-8
 from faker import Faker
 import datetime
 
@@ -15,7 +13,7 @@ for i in range(10):
     result = fk.date_between(st, se)
     result = fk.date_this_month()
     result = fk.date_this_year()
-    result = fk.date_time_between()
+    result = fk.date_time_between(start_date=st, end_date=se)
     result = fk.day_of_week()
     result = fk.month_name()
     result = fk.ascii_email()

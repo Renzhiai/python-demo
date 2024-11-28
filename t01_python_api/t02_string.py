@@ -1,4 +1,4 @@
-# coding:utf-8
+# coding=utf-8
 
 print('ab,De,s'.split(','))  # ['ab', 'De', 's']
 

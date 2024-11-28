@@ -1,4 +1,4 @@
-# coding:utf-8
+# coding=utf-8
 import time, threading
 
 # python有一个GIL锁，任何Python线程执行前，必须先获得GIL锁，是单核多线程
